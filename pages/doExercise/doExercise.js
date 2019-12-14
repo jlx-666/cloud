@@ -38,8 +38,8 @@ Page({
     var that = this
     var nowpage = this.data.nowPage
     console.log(this.data.nowPage - 1)
-    var answerMap = this.data.answer;
-    answerMap.set(this.data.nowPage, answer)
+    var answerMap = this.data.answer
+    answerMap.set(nowpage, answer)
     if (nowpage > 1) {
       //选择题操作
       console.log("选择")
@@ -60,19 +60,21 @@ Page({
           checklist[3] = true
           break;
       }
-
+      if(nowpage>1){
+        answer = a.get(nowpage - 1)
+      } 
       this.setData({
         answer: answerMap,
         checkList: checklist
       })
-    } else if (nowpage > this.data.lastChoice+1) {
+    } else if (nowpage > this.data.lastChoice) {
       //填空题操作
 
       console.log("填空")
-    } else if (nowpage > this.data.lastBlank+1) {
+    } else if (nowpage > this.data.lastBlank) {
       //应用题操作
       console.log("应用")
-    } else if (nowpage > this.data.lastWordProblem+1) {
+    } else if (nowpage > this.data.lastWordProblem) {
       //交卷  
       console.log("交卷")
     }
@@ -89,15 +91,15 @@ Page({
   nextPage:function(){
     var that = this
     var nowpage = this.data.nowPage
-    console.log(this.data.nowPage+1)
+    console.log(nowpage+1)
     var answerMap = this.data.answer;
-    answerMap.set(this.data.nowPage, answer)
+    answerMap.set(nowpage, answer)
     if(nowpage > 0){
       //选择题操作
       console.log("选择")
       var a = that.data.answer
       var checklist = new Array(false, false, false, false)
-      switch (a.get(nowpage + 1)) {
+      switch (a.get(nowpage +1 )) {
         case "A":
           checklist[0] = true
           break;
@@ -111,7 +113,7 @@ Page({
           checklist[3] = true
           break;
       }
-
+        answer = a.get(nowpage + 1)
       this.setData({
         answer: answerMap,
         checkList: checklist
