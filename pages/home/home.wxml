@@ -1,0 +1,2 @@
+
+<button bindtap="getPaperAuto">自动组卷</button>
