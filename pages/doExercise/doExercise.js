@@ -19,7 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var data = wx.getStorageSync("GApaper")
+    var data = wx.getStorageSync("paper")
     var choicesLength = data.choices.length
     var blanksLength = data.blanks.length
     var wordProblemLength = data.wordProblems.length

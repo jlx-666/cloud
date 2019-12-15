@@ -1,80 +1,54 @@
-// pages/getByAuto/getByGA/getByGA.js
+// pages/paperBase/paperBase.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isloading:false,
-    paper:null
+    paperbases:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-
-
-  setDifficulty: function (e) {
-    this.setData({
-      difficulty: e.detail.value
-    })
-  },
-  getPaperGA: function () {
-    var that = this;
+    var that = this
     wx.request({
-      url: 'http://localhost:8080/getGA',
-      data: {
-        difficulty: this.data.difficulty
-      },
+      url: 'http://127.0.0.1:8080/getPaperIds',
+      
       method: 'GET',
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/json'
       },
+
+
       success: function (res) {
+       
         
+        that.setData({
+          paperbases:res.data
+        })
+      }
+    })
+    console.log("ok"+this.data.paperbases)
+  },
+
+  goExercise:function(e){      
+    var id = e.currentTarget.dataset.id;
+    wx.request({
+      url: 'http://127.0.0.1:8080/getById',
+      data:{
+        id : id
+      },
+      success:function(res){
         wx.setStorageSync("paper", res.data)
         console.log(res.data)
-        that.setData({
-          isloading:true,
-          paper:res.data
+        wx.navigateTo({
+          url: '/pages/doExercise/doExercise',
         })
       }
     })
   },
-
-goExercise:function(){
-  if (this.data.isloading) {
-    wx.navigateTo({
-      url: '/pages/doExercise/doExercise',
-    })
-  }
-},
-
-savePaper:function(){
-  var that = this
-  var paper = this.data.paper.choices[0]
-  console.log(paper)
-  if (this.data.isloading) {
-    wx.request({
-      url: 'http://127.0.0.1:8080/savePaper',
-      data: {
-        paper: JSON.stringify(paper)
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json'
-      },
-      
-
-      success:function(res){
-        console.log(res.data)
-      }
-    })
-  }
-},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
