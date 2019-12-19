@@ -55,7 +55,7 @@ goExercise:function(){
 
 savePaper:function(){
   var that = this
-  var paper = this.data.paper.choices[0]
+  var paper = this.data.paper
   console.log(paper)
   if (this.data.isloading) {
     wx.request({
