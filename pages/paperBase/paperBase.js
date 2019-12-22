@@ -20,17 +20,13 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-
-
       success: function (res) {
-       
-        
-        that.setData({
-          paperbases:res.data
-        })
-      }
+      that.setData({
+        paperbases:res.data
+      })
+     }
     })
-    console.log("ok"+this.data.paperbases)
+    console.log("ok"+that.data.paperbases)
   },
 
   goExercise:function(e){      

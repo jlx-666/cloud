@@ -30,6 +30,7 @@ Page({
             var obj = {};
             obj.openid = res.data.openid;
             console.log(obj);
+            app.globalData.openid = obj.openid
             wx.setStorageSync('user', obj);//存储openid  
           }
         });

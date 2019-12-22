@@ -1,4 +1,5 @@
 // pages/getByAuto/getByGA/getByGA.js
+
 Page({
 
   /**

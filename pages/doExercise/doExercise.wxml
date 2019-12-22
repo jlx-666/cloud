@@ -1,5 +1,7 @@
 <block wx:if="{{nowPage==0}}">
   <view>本卷难度：{{exercise.difficulty}}</view>
+  <button wx:if="{{!saveState}}" bindtap="addCollection">收藏</button>
+  <button wx:if="{{saveState}}" bindtap="dropCollection">取消收藏</button>
   <button bindtap="nextPage">开始练习</button>
 </block>
 <block wx:elif="{{nowPage>0&&nowPage<=lastChoice}}">

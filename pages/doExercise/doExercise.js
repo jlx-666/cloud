@@ -1,5 +1,6 @@
 // pages/doExercise/doExercise.js
 var answer;
+const app = getApp();
 Page({
 
   /**
@@ -12,26 +13,55 @@ Page({
     lastBlank:0,
     lastWordProblem:0,
     answer:null,
-    checkList: new Array(false,false,false,false)
+    checkList: new Array(false,false,false,false),
+    saveState:false
   },
   
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     var data = wx.getStorageSync("paper")
     var choicesLength = data.choices.length
     var blanksLength = data.blanks.length
     var wordProblemLength = data.wordProblems.length
-    var answerMap = new Map();
+    var answerMap = new Map()
     this.setData({
       exercise : data,
       lastChoice : choicesLength,
       lastBlank : choicesLength+blanksLength,
       lastWordProblem : choicesLength+blanksLength+wordProblemLength,
-      answer : answerMap
     })
-  
+    var paperId = this.data.exercise.id
+    var openId = app.globalData.openid
+    if(paperId!=0){
+      wx.request({
+        url: 'http://127.0.0.1:8080/judgeById',
+        data:{
+          paperId : paperId,
+          openId:openId
+        },
+        method:'POST',
+        header:{
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success:function(res){
+          console.log(res.data)
+          that.setData({
+            saveState:res.data
+          })
+          that.setAnswer()
+        }
+      })
+      console.log("1")
+    }
+    else {
+      this.setData({
+        answer: new Map()
+      })
+    }
   },
 
   lastPage: function () {
@@ -93,8 +123,9 @@ Page({
     var nowpage = this.data.nowPage
     console.log(nowpage+1)
     var answerMap = this.data.answer;
+    console.log(answerMap)
     answerMap.set(nowpage, answer)
-    if(nowpage > 0){
+    if(nowpage >= 0){
       //选择题操作
       console.log("选择")
       var a = that.data.answer
@@ -132,7 +163,7 @@ Page({
       console.log("初始")
     }
     console.log(this.data.answer)
-    
+    that.saveCollection()
     this.setData({
       nowPage: that.data.nowPage + 1,
     })
@@ -140,53 +171,113 @@ Page({
   radiochange:function(e){
     answer = e.detail.value
   },
-
-
   
-
-  onReady: function () {
-
+  addCollection:function(){
+    var that = this
+    var openid = app.globalData.openid
+    var paperid = this.data.exercise.id
+    console.log("openid:"+openid)
+    wx.request({
+      url: 'http://127.0.0.1:8080/addCollection',
+      data:{
+        openId:openid,
+        paperId:paperid
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        that.setData({
+          saveState: true
+        })
+      }
+    })
+  },
+  saveCollection:function(){
+    var that = this
+    let obj = Object.create(null);
+    for (let [k, v] of that.data.answer) {
+      obj[k] = v;
+    }
+    if(this.data.saveState){
+      wx.request({
+        url: 'http://127.0.0.1:8080/saveCollection',
+        data:{
+          openId:app.globalData.openid,
+          paperId:that.data.exercise.id,
+          answer:JSON.stringify(obj)
+        },
+        method:'POST',
+        header:{
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        
+      })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
 
+  dropCollection:function(){
+    var that = this
+    wx.request({
+      url: 'http://127.0.0.1:8080/dropCollection',
+      data:{
+        openId: app.globalData.openid,
+        paperId: that.data.exercise.id,
+      },
+      method:'POST',
+      header:{
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success:function(res){
+        that.setData({
+          saveState:false
+        })
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  setAnswer:function(){
+    var that = this
+    console.log(this.data.saveState)
+    var paperId = this.data.exercise.id
+    var openId = app.globalData.openid
+    var answerMap
+    if (this.data.saveState) {
+      console.log("etAnswer")
+      wx.request({
+        url: 'http://127.0.0.1:8080/getAnswer',
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          paperId: paperId,
+          openId: openId
+        },
+        success: function (res) {
+          answerMap = res.data
+          let strMap = new Map();
+          for (let k of Object.keys(answerMap)) {
+            let key = parseInt(k)
+            strMap.set(key, answerMap[k]);
+          }
+            console.log(strMap)
+          that.setData({
+            answer:strMap
+          })
+        }
+      })
+    }
+    else {
+      console.log("notget")
+      answerMap = new Map()
+      that.setData({
+        answer: answerMap
+      })
+    }
+    console.log("2")
   }
 })
