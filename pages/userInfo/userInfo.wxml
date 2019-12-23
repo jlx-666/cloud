@@ -9,4 +9,7 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+  <view>
+    <button bindtap="goCollection">我的收藏</button>
+  </view>
 </view>

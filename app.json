@@ -8,7 +8,8 @@
     "pages/getByAuto/getByAuto",
     "pages/getByAuto/getByGA/getByGA",
     "pages/doExercise/doExercise",
-    "pages/paperBase/paperBase"
+    "pages/paperBase/paperBase",
+    "pages/mine/myCollections/myCollections"
   ],
   "window": {
     "backgroundTextStyle": "light",

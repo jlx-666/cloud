@@ -1,0 +1,3 @@
+<view wx:for = "{{paperbase}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goExercise">
+  {{item.title}}     难度值：{{item.difficulty}}  
+</view>
