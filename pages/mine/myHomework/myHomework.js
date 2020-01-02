@@ -1,49 +1,20 @@
-// pages/paperBase/paperBase.js
+// pages/mine/myHomeWork/myHomework.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    paperbases:null
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    wx.request({
-      url: 'http://127.0.0.1:8080/getPaperIds',
-      
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-      that.setData({
-        paperbases:res.data
-      })
-     }
-    })
+
   },
 
-  goExercise:function(e){      
-    var id = e.currentTarget.dataset.id;
-    wx.request({
-      url: 'http://127.0.0.1:8080/getById',
-      data:{
-        id : id
-      },
-      success:function(res){
-        wx.setStorageSync("paper", res.data)
-        console.log(res.data)
-        wx.navigateTo({
-          url: '/pages/doExercise/doExercise',
-        })
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

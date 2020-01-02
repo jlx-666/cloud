@@ -48,14 +48,14 @@ Page({
           'content-type': 'application/x-www-form-urlencoded'
         },
         success:function(res){
-          console.log(res.data)
           that.setData({
             saveState:res.data
           })
+          console.log("微信请求成功后：" + that.data.saveState)
           that.setAnswer()
         }
       })
-      console.log("1")
+      console.log("请求方法后：" +this.data.saveState)
     }
     else {
       this.setData({

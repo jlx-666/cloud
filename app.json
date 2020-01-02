@@ -9,7 +9,13 @@
     "pages/getByAuto/getByGA/getByGA",
     "pages/doExercise/doExercise",
     "pages/paperBase/paperBase",
-    "pages/mine/myCollections/myCollections"
+    "pages/mine/myCollections/myCollections",
+    "pages/mine/myHomeWork/myHomework",
+    "pages/myClass/myClass",
+    "pages/myClass/addClass/addClass",
+    "pages/myClass/classDetail/classDetail",
+    "pages/myClass/classInfo/classInfo",
+    "pages/myClass/findClass/findClass"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,6 +37,10 @@
       {
         "pagePath": "pages/paperBase/paperBase",
         "text": "试题"
+      },
+      {
+        "pagePath": "pages/myClass/myClass",
+        "text": "班级"
       },
       {
         "pagePath": "pages/userInfo/userInfo",

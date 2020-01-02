@@ -1,0 +1,4 @@
+<view>成员情况</view>
+<view>教师：{{teacher}}</view>
+<view>学生</view>
+<view wx:for = "{{menber}}">{{item}}</view>

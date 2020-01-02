@@ -1,0 +1,15 @@
+  <view>{{detail.name}}({{detail.id}})     </view>
+<block wx:if="{{who=='student'}}">
+  <button bindtap="goInfo">成员情况</button>
+  <view>考试</view>
+  <view>作业</view>
+</block>
+<block wx:elif="{{who=='notJoin'}}">
+  <view>老师：{{detail.masterId}}</view>
+  <button bindtap="join">加入班级</button>
+</block>
+<block wx:else>
+  <button bindtap="goInfo">成员情况</button>
+  <view>发布作业</view>
+  <view>发布试卷</view>
+</block>
