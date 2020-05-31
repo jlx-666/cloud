@@ -1,1 +1,29 @@
 /* pages/doExercise/doExercise.wxss */
+.page-container {
+  padding: 30rpx 16rpx 0 16rpx;
+}
+
+.diff-value {
+  color: #19be6b;
+  font-size: 30rpx;
+}
+.page-name {
+  font-size: 36rpx;
+}
+.start-btn {
+  bottom: 130rpx;
+}
+.radio-group-items > view {
+  margin-top: 30rpx;
+}
+.btns {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.small-btn {
+  width: 40%;
+
+}

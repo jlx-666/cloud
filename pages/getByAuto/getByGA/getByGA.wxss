@@ -1,1 +1,9 @@
 /* pages/getByAuto/getByGA/getByGA.wxss */
+.start-btn {
+  bottom: 130rpx;
+}
+.title {
+  display: inline-block;
+  margin-top: 100rpx;
+  margin-left: 16rpx;
+}

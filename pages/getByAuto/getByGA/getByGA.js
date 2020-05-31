@@ -1,4 +1,5 @@
 // pages/getByAuto/getByGA/getByGA.js
+const { $Message } = require('../../../dist/base/index');
 
 Page({
 
@@ -7,7 +8,8 @@ Page({
    */
   data: {
     isloading:false,
-    paper:null
+    paper:null,
+    apiLoading: false,
   },
 
   /**
@@ -24,7 +26,17 @@ Page({
     })
   },
   getPaperGA: function () {
+    if(!this.data.difficulty) {
+      $Message({
+        content: '提示',
+        type: 'error'
+      })
+      return
+    }
     var that = this;
+    this.setData({
+      apiLoading: true
+    })
     wx.request({
       url: 'http://' + getApp().globalData.ipAdress + '/getGA',
       data: {
@@ -40,7 +52,8 @@ Page({
         console.log(res.data)
         that.setData({
           isloading:true,
-          paper:res.data
+          paper:res.data,
+          apiLoading: false
         })
       }
     })
@@ -60,7 +73,7 @@ addCollection:function(){
   console.log(paper)
   if (this.data.isloading) {
     wx.request({
-      url: 'http://127.0.0.1:8080/savePaper',
+      url: 'http://' + getApp().globalData.ipAdress + '/savePaper',
       data: {
         paper: JSON.stringify(paper)
       },

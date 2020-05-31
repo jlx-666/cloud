@@ -15,7 +15,7 @@ Page({
     answer:null,
     checkList: new Array(false,false,false,false),
     saveState:false,
-    color: new Array('#F5F5F5', '#FFF8DC', '#FFFAF0', 'black')
+    color: new Array('#fff', '#fff', '#fff', '#fff')
   },
   
 

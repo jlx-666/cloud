@@ -1,6 +1,9 @@
+<view class="title">试卷推荐</view>
+<i-cell-group>
+  <i-cell wx:for = "{{paperbases}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goExercise">
+    <text>{{item.title}}</text>     
+    <text class="hard-title">难度值：<text class="hard-val">{{item.difficulty}}</text></text>
+  </i-cell>
+</i-cell-group>
 
-<button bindtap="getPaperAuto">自动组卷</button>
-<view>试卷推荐</view>
-<view wx:for = "{{paperbases}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goExercise">
-  {{item.title}}     难度值：{{item.difficulty}}  
-</view>
+<i-button class="footer-btn" type="primary" bind:click="getPaperAuto">自动组卷</i-button>
