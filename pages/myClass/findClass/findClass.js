@@ -18,7 +18,7 @@ Page({
     }
     else{
       wx.request({
-        url: 'http://127.0.0.1:8080/getDetailById',
+        url: 'http://' + getApp().globalData.ipAdress + '/getDetailById',
         data: {
           id: that.data.classId
         },

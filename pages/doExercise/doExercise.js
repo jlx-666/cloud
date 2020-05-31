@@ -14,7 +14,8 @@ Page({
     lastWordProblem:0,
     answer:null,
     checkList: new Array(false,false,false,false),
-    saveState:false
+    saveState:false,
+    color: new Array('#F5F5F5', '#FFF8DC', '#FFFAF0', 'black')
   },
   
 
@@ -38,7 +39,7 @@ Page({
     var openId = app.globalData.openid
     if(paperId!=0){
       wx.request({
-        url: 'http://127.0.0.1:8080/judgeById',
+        url: 'http://' + getApp().globalData.ipAdress + '/judgeById',
         data:{
           paperId : paperId,
           openId:openId
@@ -178,7 +179,7 @@ Page({
     var paperid = this.data.exercise.id
     console.log("openid:"+openid)
     wx.request({
-      url: 'http://127.0.0.1:8080/addCollection',
+      url: 'http://' + getApp().globalData.ipAdress + '/addCollection',
       data:{
         openId:openid,
         paperId:paperid
@@ -202,7 +203,7 @@ Page({
     }
     if(this.data.saveState){
       wx.request({
-        url: 'http://127.0.0.1:8080/saveCollection',
+        url: 'http://' + getApp().globalData.ipAdress + '/saveCollection',
         data:{
           openId:app.globalData.openid,
           paperId:that.data.exercise.id,
@@ -221,7 +222,7 @@ Page({
   dropCollection:function(){
     var that = this
     wx.request({
-      url: 'http://127.0.0.1:8080/dropCollection',
+      url: 'http://' + getApp().globalData.ipAdress + '/dropCollection',
       data:{
         openId: app.globalData.openid,
         paperId: that.data.exercise.id,
@@ -248,7 +249,7 @@ Page({
     if (this.data.saveState) {
       console.log("etAnswer")
       wx.request({
-        url: 'http://127.0.0.1:8080/getAnswer',
+        url: 'http://' + getApp().globalData.ipAdress + '/getAnswer',
         method: 'POST',
         header: {
           'content-type': 'application/x-www-form-urlencoded'

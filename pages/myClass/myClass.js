@@ -21,7 +21,7 @@ Page({
     })
     console.log(getApp().globalData.openid)
     wx.request({
-      url: 'http://127.0.0.1:8080/getMyFound',
+      url: 'http://' + getApp().globalData.ipAdress + '/getMyFound',
       data:{
         openid : getApp().globalData.openid
       },
@@ -47,7 +47,7 @@ Page({
 
     })
     wx.request({
-      url: 'http://127.0.0.1:8080/getMyJoin',
+      url: 'http://' + getApp().globalData.ipAdress + '/getMyJoin',
       data: {
         openid: getApp().globalData.openid
       },
@@ -78,7 +78,7 @@ Page({
 
   goDetail:function(e){
     wx.request({
-      url: 'http://127.0.0.1:8080/getDetailById',
+      url: 'http://' + getApp().globalData.ipAdress + '/getDetailById',
       data: {
         id: e.currentTarget.dataset.id
       },

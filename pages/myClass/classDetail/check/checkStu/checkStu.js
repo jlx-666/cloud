@@ -253,7 +253,7 @@ Page({
     var answerMap
     if (wx.getStorageSync("checkCollection")) {
       wx.request({
-        url: 'http://127.0.0.1:8080/getAnswer',
+        url: 'http://' + getApp().globalData.ipAdress + '/getAnswer',
         method: 'POST',
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -278,7 +278,7 @@ Page({
     }
     else {
       wx.request({
-        url: 'http://127.0.0.1:8080/getHomeworkAnswer',
+        url: 'http://' + getApp().globalData.ipAdress + '/getHomeworkAnswer',
         method: 'POST',
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -311,7 +311,7 @@ Page({
     var openId = app.globalData.openid
     var answerMap
     wx.request({
-      url: 'http://127.0.0.1:8080/findAnswerByPaperId',
+      url: 'http://' + getApp().globalData.ipAdress + '/findAnswerByPaperId',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'

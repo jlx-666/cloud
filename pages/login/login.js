@@ -38,7 +38,7 @@ Page({
     })
     var obj = wx.getStorageSync('user');
     wx.request({
-      url: 'http://localhost:8080/login',
+      url: 'http://'+getApp().globalData.ipAdress+'/login',
       data:{
         openid:obj.openid,
         name: app.globalData.userInfo.nickName,
@@ -86,7 +86,7 @@ Page({
     })
     var obj = wx.getStorageSync('user');
     wx.request({
-      url: 'http://localhost:8080/login',
+      url: 'http://' + getApp().globalData.ipAdress + '/login',
       data: {
         openid: obj.openid,
         name: app.globalData.userInfo.nickName,

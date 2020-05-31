@@ -27,7 +27,7 @@ Page({
       userType:getApp().globalData.userType
     })
     wx.request({
-      url: 'http://127.0.0.1:8080/judgeWho',
+      url: 'http://' + getApp().globalData.ipAdress + '/judgeWho',
       data: {
         openId:getApp().globalData.openid,
         classId:that.data.detail.id
@@ -42,7 +42,7 @@ Page({
         })
         if(that.data.who=='teacher'){
           wx.request({
-            url: 'http://127.0.0.1:8080/getClassPaperListByState',
+            url: 'http://' + getApp().globalData.ipAdress + '/getClassPaperListByState',
             data: {
               classId: that.data.detail.id,
               state: '未完成'
@@ -63,7 +63,7 @@ Page({
             },
           })
           wx.request({
-            url: 'http://127.0.0.1:8080/getClassPaperListByState',
+            url: 'http://' + getApp().globalData.ipAdress + '/getClassPaperListByState',
             data: {
               classId: that.data.detail.id,
               state: '已完成'
@@ -85,7 +85,7 @@ Page({
           })
         }else{
           wx.request({
-            url: 'http://127.0.0.1:8080/changeSomeoneState',//HomeworkController
+            url: 'http://' + getApp().globalData.ipAdress + '/changeSomeoneState',//HomeworkController
             data: {
               openid: getApp().globalData.openid,
             },
@@ -95,7 +95,7 @@ Page({
             },
             success: function (res) {
               wx.request({
-                url: 'http://127.0.0.1:8080/findHomeworkOfSomeoneInClassIdByState',
+                url: 'http://' + getApp().globalData.ipAdress + '/findHomeworkOfSomeoneInClassIdByState',
                 data: {
                   openId: getApp().globalData.openid,
                   classId: that.data.detail.id,
@@ -117,7 +117,7 @@ Page({
                 }
               })
               wx.request({
-                url: 'http://127.0.0.1:8080/findHomeworkOfSomeoneInClassIdByState',
+                url: 'http://' + getApp().globalData.ipAdress + '/findHomeworkOfSomeoneInClassIdByState',
                 data: {
                   openId: getApp().globalData.openid,
                   classId: that.data.detail.id,
@@ -158,7 +158,7 @@ Page({
   join:function(){
     var that = this
     wx.request({
-      url: 'http://127.0.0.1:8080/joinClass',
+      url: 'http://' + getApp().globalData.ipAdress + '/joinClass',
       data: {
         openId: getApp().globalData.openid,
         classId: that.data.detail.id
@@ -202,7 +202,7 @@ Page({
   findPersonalHomework:function(){
     var that = this
     wx.request({
-      url: 'http://127.0.0.1:8080/findHomeworkOfSomeoneInClassIdByState',
+      url: 'http://' + getApp().globalData.ipAdress + '/findHomeworkOfSomeoneInClassIdByState',
       data: {
         openid: getApp().globalData.openid,
         classId: that.data.detail.id,
@@ -224,7 +224,7 @@ Page({
     var homework = e.currentTarget.dataset.item;
     var paper_id = homework.paper_id;
     wx.request({
-      url: 'http://127.0.0.1:8080/getById',
+      url: 'http://' + getApp().globalData.ipAdress + '/getById',
       data: {
         id: paper_id,
       },
@@ -243,7 +243,7 @@ Page({
     var id = homework.paper_id;
     console.log(id)
     wx.request({
-      url: 'http://127.0.0.1:8080/getById',
+      url: 'http://' + getApp().globalData.ipAdress + '/getById',
       data: {
         id: id
       },
@@ -262,7 +262,7 @@ Page({
     console.log(id)
     wx.setStorageSync("homeworkOver",true)
     wx.request({
-      url: 'http://127.0.0.1:8080/getById',
+      url: 'http://' + getApp().globalData.ipAdress + '/getById',
       data: {
         id: id
       },
@@ -280,7 +280,7 @@ Page({
     console.log(id)
     wx.setStorageSync("homeworkOver",false)
     wx.request({
-      url: 'http://127.0.0.1:8080/getById',
+      url: 'http://' + getApp().globalData.ipAdress + '/getById',
       data: {
         id: id
       },

@@ -170,7 +170,7 @@ Page({
     }
     if (this.data.saveState) {
       wx.request({
-        url: 'http://127.0.0.1:8080/saveHomework',
+        url: 'http://' + getApp().globalData.ipAdress + '/saveHomework',
         data: {
           classId: that.data.classId,
           openId: app.globalData.openid,
@@ -198,7 +198,7 @@ Page({
     if (this.data.saveState) {
       console.log("etAnswer")
       wx.request({
-        url: 'http://127.0.0.1:8080/getHomeworkAnswer',
+        url: 'http://' + getApp().globalData.ipAdress + '/getHomeworkAnswer',
         method: 'POST',
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -239,7 +239,7 @@ Page({
       obj[k] = v;
     }
     wx.request({
-      url: 'http://127.0.0.1:8080/homeworkDone',
+      url: 'http://' + getApp().globalData.ipAdress + '/homeworkDone',
       data: {
         classId: that.data.classId,
         openId: app.globalData.openid,

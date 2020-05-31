@@ -18,7 +18,7 @@ Page({
     var that = this
     console.log(getApp().globalData.openid)
     wx.request({
-      url: 'http://127.0.0.1:8080/changeSomeoneState',//HomeworkController
+      url: 'http://' + getApp().globalData.ipAdress + '/changeSomeoneState',//HomeworkController
       data: {
         openid: getApp().globalData.openid,
       },
@@ -28,7 +28,7 @@ Page({
       },
       success: function (res) {
         wx.request({
-          url: 'http://127.0.0.1:8080/findPersonalHomeworkByState',
+          url: 'http://' + getApp().globalData.ipAdress + '/findPersonalHomeworkByState',
           data: {
             openid: getApp().globalData.openid,
             state: '未完成'
@@ -55,7 +55,7 @@ Page({
 
         })
         wx.request({
-          url: 'http://127.0.0.1:8080/findPersonalHomeworkByState',
+          url: 'http://' + getApp().globalData.ipAdress + '/findPersonalHomeworkByState',
           data: {
             openid: getApp().globalData.openid,
             state: '已完成'
@@ -89,7 +89,7 @@ Page({
     var homework = e.currentTarget.dataset.item;
     var paper_id = homework.paper_id;
     wx.request({
-      url: 'http://127.0.0.1:8080/getById',
+      url: 'http://' + getApp().globalData.ipAdress + '/getById',
       data: {
         id: paper_id,
       },

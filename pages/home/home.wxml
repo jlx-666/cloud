@@ -1,2 +1,6 @@
 
 <button bindtap="getPaperAuto">自动组卷</button>
+<view>试卷推荐</view>
+<view wx:for = "{{paperbases}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goExercise">
+  {{item.title}}     难度值：{{item.difficulty}}  
+</view>

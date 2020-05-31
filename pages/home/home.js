@@ -5,19 +5,50 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    paperbases: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/getPaperIds',
 
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        that.setData({
+          paperbases: res.data
+        })
+      }
+    })
   },
-  
+
+
+  goExercise: function (e) {
+    var id = e.currentTarget.dataset.id;
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/getById',
+      data: {
+        id: id
+      },
+      success: function (res) {
+        wx.setStorageSync("paper", res.data)
+        console.log(res.data)
+        wx.navigateTo({
+          url: '/pages/doExercise/doExercise',
+        })
+      }
+    })
+  },
+
   getPaperAuto:function(){
       wx.navigateTo({
-        url: '../getByAuto/getByAuto',
+        url: '../getByAuto/getByGA/getByGA'
       })
   },
   /**

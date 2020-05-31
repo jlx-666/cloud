@@ -43,7 +43,7 @@ Page({
     var openId = app.globalData.openid
     if (paperId != 0) {
       wx.request({
-        url: 'http://127.0.0.1:8080/judgeById',
+        url: 'http://' + getApp().globalData.ipAdress + '/judgeById',
         data: {
           paperId: paperId,
           openId: openId
@@ -143,7 +143,7 @@ Page({
     console.log(how_long)
     console.log('preview:classId='+classId+'    paperId='+paperId)
     wx.request({
-      url: 'http://127.0.0.1:8080/addHomework',
+      url: 'http://' + getApp().globalData.ipAdress + '/addHomework',
       data: {
         paperId: paperId,
         classId: classId,

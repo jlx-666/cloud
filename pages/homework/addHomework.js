@@ -16,7 +16,7 @@ Page({
     var classId = options.classId
     var that = this
     wx.request({
-      url: 'http://127.0.0.1:8080/getMyCollections',
+      url: 'http://' + getApp().globalData.ipAdress + '/getMyCollections',
       data: {
         openId: getApp().globalData.openid
       },
@@ -40,7 +40,7 @@ Page({
     var that =this
     var id = e.currentTarget.dataset.id;
     wx.request({
-      url: 'http://127.0.0.1:8080/getById',
+      url: 'http://' + getApp().globalData.ipAdress + '/getById',
       data: {
         id: id
       },

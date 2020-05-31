@@ -37,7 +37,8 @@ App({
     userInfo: null,
     openid:null,
     name:null,
-    userType:0
+    userType:0,
+    ipAdress:'3192io8032.zicp.vip'
   },
  
 

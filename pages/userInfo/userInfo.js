@@ -23,7 +23,7 @@ Page({
       hasUserInfo: true,
     })
     wx.request({
-      url: 'http://127.0.0.1:8080/getNameById',
+      url: 'http://' + getApp().globalData.ipAdress + '/getNameById',
       data: {
         openid: getApp().globalData.openid
       },
@@ -83,7 +83,7 @@ Page({
     });
     var name = this.data.newName;
     wx.request({
-      url: 'http://127.0.0.1:8080/saveUser',
+      url: 'http://' + getApp().globalData.ipAdress + '/saveUser',
       data: {
         openid: getApp().globalData.openid,
         name:name

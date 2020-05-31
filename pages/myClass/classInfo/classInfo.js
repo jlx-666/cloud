@@ -18,7 +18,7 @@ Page({
     var id = options.id
     var that = this
     wx.request({
-      url: 'http://127.0.0.1:8080/getMemberIds',
+      url: 'http://' + getApp().globalData.ipAdress + '/getMemberIds',
       data: {
         classId: id
       },
@@ -32,7 +32,7 @@ Page({
         })
         console.log(that.data.memberIds)
         wx.request({
-          url: 'http://127.0.0.1:8080/getNameByMemberIds',
+          url: 'http://' + getApp().globalData.ipAdress + '/getNameByMemberIds',
           data: {
             memberIds: JSON.stringify(that.data.memberIds)
           },
@@ -50,7 +50,7 @@ Page({
     }),
     console.log(that.data.member)
     wx.request({
-      url: 'http://127.0.0.1:8080/getDetailById',
+      url: 'http://' + getApp().globalData.ipAdress + '/getDetailById',
       data: {
         id: id
       },
@@ -63,7 +63,7 @@ Page({
           teacherId: res.data.masterId,
         })
         wx.request({
-          url: 'http://127.0.0.1:8080/getNameById',
+          url: 'http://' + getApp().globalData.ipAdress + '/getNameById',
           data: {
             openid: that.data.teacherId
           },

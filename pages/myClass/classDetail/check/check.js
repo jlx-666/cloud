@@ -51,7 +51,7 @@ Page({
     })
     if(!this.data.homeworkOver){
       wx.request({
-        url: 'http://127.0.0.1:8080/getRemainingTime',
+        url: 'http://' + getApp().globalData.ipAdress + '/getRemainingTime',
         data: {
           paperId: that.data.exercise.id,
           classId: that.data.classId,
@@ -107,7 +107,7 @@ Page({
       if (that.data.nowPage != 0) {
         var countMap
         wx.request({
-          url: 'http://127.0.0.1:8080/checkChoiceOfHomeworkClass',
+          url: 'http://' + getApp().globalData.ipAdress + '/checkChoiceOfHomeworkClass',
           method: 'POST',
           header: {
             'content-type': 'application/x-www-form-urlencoded'
@@ -212,7 +212,7 @@ Page({
       if(that.data.nowPage>=0){
         var countMap
         wx.request({
-          url: 'http://127.0.0.1:8080/checkChoiceOfHomeworkClass',
+          url: 'http://' + getApp().globalData.ipAdress + '/checkChoiceOfHomeworkClass',
           method: 'POST',
           header: {
             'content-type': 'application/x-www-form-urlencoded'
@@ -294,7 +294,7 @@ Page({
     var paperId = this.data.exercise.id
     var classId = this.data.classId
     wx.request({
-      url: 'http://127.0.0.1:8080/changeStateByClassAndPaper',
+      url: 'http://' + getApp().globalData.ipAdress + '/changeStateByClassAndPaper',
       data: {
         paperId: paperId,
         classId: classId,
@@ -324,7 +324,7 @@ Page({
     var paperId = this.data.exercise.id
     var answerMap
     wx.request({
-      url: 'http://127.0.0.1:8080/findAnswerByPaperId',
+      url: 'http://' + getApp().globalData.ipAdress + '/findAnswerByPaperId',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -351,7 +351,7 @@ Page({
     var that = this
     var countMap
     wx.request({
-      url: 'http://127.0.0.1:8080/checkChoiceOfHomeworkClass',
+      url: 'http://' + getApp().globalData.ipAdress + '/checkChoiceOfHomeworkClass',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'

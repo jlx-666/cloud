@@ -26,7 +26,7 @@ Page({
   getPaperGA: function () {
     var that = this;
     wx.request({
-      url: 'http://localhost:8080/getGA',
+      url: 'http://' + getApp().globalData.ipAdress + '/getGA',
       data: {
         difficulty: this.data.difficulty
       },

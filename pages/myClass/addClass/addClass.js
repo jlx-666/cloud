@@ -19,7 +19,7 @@ Page({
     let openid = getApp().globalData.openid
     let name = this.data.name
     wx.request({
-      url: 'http://127.0.0.1:8080/addClass',
+      url: 'http://' + getApp().globalData.ipAdress + '/addClass',
       data:{
         openid:openid,
         name:name

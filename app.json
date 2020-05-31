@@ -5,7 +5,6 @@
     "pages/logs/logs",
     "pages/home/home",
     "pages/userInfo/userInfo",
-    "pages/getByAuto/getByAuto",
     "pages/getByAuto/getByGA/getByGA",
     "pages/doExercise/doExercise",
     "pages/paperBase/paperBase",
@@ -20,8 +19,7 @@
     "pages/homework/myHomework/myHomework",
     "pages/homework/doHomework/doHomework",
     "pages/myClass/classDetail/check/check",
-    "pages/myClass/classDetail/check/checkStu/checkStu",
-    "pages/myClass/classDetail/check/checkClass/checkClass"
+    "pages/myClass/classDetail/check/checkStu/checkStu"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -40,12 +38,7 @@
         "pagePath": "pages/home/home",
         "text": "首页"
       },
-      {
-        "iconPath": "images/练习.png",
-        "selectedIconPath": "images/练习_填充.png",
-        "pagePath": "pages/paperBase/paperBase",
-        "text": "试题"
-      },
+     
       {
         "iconPath": "images/班级.png",
         "selectedIconPath": "images/班级_填充.png",
