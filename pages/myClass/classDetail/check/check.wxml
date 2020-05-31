@@ -1,0 +1,52 @@
+<block wx:if="{{nowPage==0}}">
+  <view>本卷难度：{{exercise.difficulty}}</view>
+  <view wx:if="{{!homeworkOver}}">剩余时间：{{timeList[0]}}天{{timeList[1]}}小时{{timeList[2]}}分钟</view>
+  <view wx:if="{{homeworkOver}}">已结束</view>
+  <button bindtap="nextPage">预览</button>
+  <button bindtap="changeAllToEnd" wx:if="{{!homeworkOver}}">提前结束</button>
+  <button bindtap="nowCheck" wx:if="{{homeworkOver}}">总体统计</button>
+</block>
+<block wx:elif="{{nowPage>0&&nowPage<=lastChoice}}">
+  <text>选择题</text>
+  <text>{{nowPage}}. {{exercise.choices[nowPage-1].title}}</text>
+  <radio-group bindchange="radiochange">
+    <view>
+      <radio value="A" checked="{{checkList[0]}}" disabled="true" style="color:{{color[0]}}"><view>A {{exercise.choices[nowPage-1].opA}}</view>
+      </radio>
+    </view>
+    <view>
+      <radio value="B" checked="{{checkList[1]}}" disabled="true" style="color:{{color[1]}}"><view>B {{exercise.choices[nowPage-1].opB}}</view>
+      </radio>
+    </view><view>
+      <radio value="C" checked="{{checkList[2]}}" disabled="true" style="color:{{color[2]}}"><view>C {{exercise.choices[nowPage-1].opC}}</view>
+      </radio>
+    </view><view>
+      <radio value="D" checked="{{checkList[3]}}" disabled="true" style="color:{{color[3]}}"><view>D {{exercise.choices[nowPage-1].opD}}</view>
+      </radio>
+    </view>
+  </radio-group>
+  <view>本题正确答案为：{{trueSelect}}</view>
+  <block wx:if="{{nowCheck}}">
+    <view>学生答题情况统计：</view>
+    <view>选择A选项{{countA}}人</view>
+    <view>选择B选项{{countB}}人</view>
+    <view>选择C选项{{countC}}人</view>
+    <view>选择D选项{{countD}}人</view>
+    <view>{{countNaN}}人未作答</view>
+  </block>
+  
+  <button bindtap="lastPage">上一题</button>
+  <button bindtap="nextPage">下一题</button>
+</block>
+<block wx:elif="{{nowPage>lastChoice&&nowPage<=lastBlank}}">
+  <text>填空题</text>
+  <text>{{nowPage}}. </text>
+  <button bindtap="lastPage">上一题</button>
+  <button bindtap="nextPage">下一题</button>
+</block>
+<block wx:elif="{{nowPage<=lastWordProblem&&nowPage>lastBlank}}">
+  <text>应用题</text>
+  <text>{{nowPage}}. {{exercise.choices[nowPage-1].title}}</text>
+  <button bindtap="lastPage">上一题</button>
+  <button bindtap="nextPage">下一题</button>
+</block>

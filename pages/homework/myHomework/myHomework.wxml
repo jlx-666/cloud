@@ -1,0 +1,14 @@
+<block wx:if="{{!noNotDone}}">
+  <view style="color:red">未完成作业</view>
+  <view wx:for = "{{notDone}}" wx:key="item.paper_id" data-item="{{item}}"  bindtap="goDoHomework">
+  {{item.paper_id}}     
+  </view>
+  <view>  </view>
+</block>
+<block wx:if="{{!noHaveDone}}">
+  <view style="color:red">已完成作业</view>
+  <view wx:for = "{{haveDone}}"wx:key="item.paper_id"  data-item="{{item}}"  bindtap="goDoHomework">
+  {{item.paper_id}}     
+  </view>
+  <view>  </view>
+</block>

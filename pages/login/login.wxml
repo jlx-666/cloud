@@ -1,3 +1,4 @@
 <text>login</text>
-<button wx:if="{{canIUse}}" open-type="getUserInfo" bindtap="getid">授权登录</button>
+<button wx:if="{{canIUse}}" open-type="getUserInfo" bindtap="getTeacherId">教师登录</button>
+<button wx:if="{{canIUse}}" open-type="getUserInfo" bindtap="getStudentId">学生登录</button>
 <view wx:else>请升级微信版本</view>

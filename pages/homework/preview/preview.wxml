@@ -1,0 +1,46 @@
+<block wx:if="{{nowPage==0}}">
+  <view>本卷难度：{{exercise.difficulty}}</view>
+  <button bindtap="nextPage">预览</button>
+</block>
+<block wx:elif="{{nowPage>0&&nowPage<=lastChoice}}">
+  <text>选择题</text>
+  <text>{{nowPage}}. {{exercise.choices[nowPage-1].title}}</text>
+  <radio-group bindchange="radiochange">
+    <view>
+      <radio value="A" checked="{{checkList[0]}}"><view>{{exercise.choices[nowPage-1].opA}}</view>
+      </radio>
+    </view>
+    <view>
+      <radio value="B" checked="{{checkList[1]}}"><view>{{exercise.choices[nowPage-1].opB}}</view>
+      </radio>
+    </view><view>
+      <radio value="C" checked="{{checkList[2]}}"><view>{{exercise.choices[nowPage-1].opC}}</view>
+      </radio>
+    </view><view>
+      <radio value="D" checked="{{checkList[3]}}"><view>{{exercise.choices[nowPage-1].opD}}</view>
+      </radio>
+    </view>
+  </radio-group>
+  <button bindtap="lastPage">上一题</button>
+  <button bindtap="nextPage">下一题</button>
+</block>
+<block wx:elif="{{nowPage>lastChoice&&nowPage<=lastBlank}}">
+  <text>填空题</text>
+  <text>{{nowPage}}. </text>
+  <button bindtap="lastPage">上一题</button>
+  <button bindtap="nextPage">下一题</button>
+</block>
+<block wx:elif="{{nowPage<=lastWordProblem&&nowPage>lastBlank}}">
+  <text>应用题</text>
+  <text>{{nowPage}}. {{exercise.choices[nowPage-1].title}}</text>
+  <button bindtap="lastPage">上一题</button>
+  <button bindtap="nextPage">下一题</button>
+</block>
+<button bindtap="setTime">发布</button>
+<modal hidden="{{hiddenSetTime}}" title="请输入时间" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+  <view class="timecontent">
+     <input bindinput="setDay" type="number" name="name"style="flex:1"></input><view style="flex:1；width:20px">天</view>
+     <input bindinput="setHour" type="number" name="name" style="flex:1"></input><view style="flex:1；width:20px">小时</view>
+     <input bindinput="setMinute" type="number" name="name" style="flex:1"></input><view style="flex:1；width:20px">分</view>
+  </view>
+   </modal>

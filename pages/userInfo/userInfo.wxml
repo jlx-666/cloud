@@ -3,7 +3,11 @@
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <text class="userinfo-nickname" bindtap="showChangeName">{{nickname}}</text>
+      <modal hidden="{{hiddenChangeName}}" title="请输入名字" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+     <input bindinput="setNewName" type="String" name="name"></input>
+   </modal>
+
     </block>
   </view>
   <view class="usermotto">
@@ -11,5 +15,11 @@
   </view>
   <view>
     <button bindtap="goCollection">我的收藏</button>
+  </view>
+    <view>
+    <button bindtap="goMyHomework">我的作业</button>
+  </view>
+  <view>
+    <button bindtap="goMyHomework" wx:if="{{administrator}}">管理员页面</button>
   </view>
 </view>

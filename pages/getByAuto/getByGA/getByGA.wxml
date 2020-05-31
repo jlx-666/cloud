@@ -1,6 +1,6 @@
 <label >输入难度值：</label>
-<input bindinput="setDifficulty" type="double" placeholder="请输入难度" name="difficulty"></input>
+<input bindinput="setDifficulty" type="digit" placeholder="请输入难度（0.1~0.9），数值越大难度越高" name="difficulty"></input>
 <button bindtap="getPaperGA">开始组卷</button>
 <button wx:if="{{isloading}}" bindtap="goExercise">开始做题</button>
-<button wx:if="{{isloading}}" bindtap="savePaper">上传试题</button>
+<button wx:if="{{isloading}}" bindtap="addCollection">推荐试题</button>
 

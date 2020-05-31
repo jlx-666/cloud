@@ -1,0 +1,40 @@
+  <view>{{detail.name}}(班级号：{{detail.id}})     </view>
+<block wx:if="{{who=='student'}}">
+  <button bindtap="goInfo">成员情况</button>
+  <view>作业</view>
+  
+  <block wx:if="{{!noNotOver}}">
+    <view style="color:green">未结束作业</view>
+    <view wx:for = "{{homeworkNotOver}}" wx:key="item.paperId" data-item="{{item}}" bindtap="goDoHomework">
+    zuoye1
+    </view>
+  </block>
+  <block wx:if="{{!noOver}}">
+    <view style="color:red">已结束作业</view>
+    <view wx:for = "{{homeworkOver}}" wx:key="item.paperId" data-item="{{item}}" bindtap="goCheck">
+    zuoye2
+    </view>
+  </block>
+</block>
+<block wx:elif="{{who=='notJoin'}}">
+  <view>老师：{{detail.masterId}}</view>
+  <button bindtap="join">加入班级</button>
+</block>
+<block wx:else>
+  <button bindtap="goInfo">成员情况</button>
+  <button bindtap="toAdd">发布作业</button>
+  <block wx:if="{{!noNotOver}}">
+    <view style="color:green">未结束作业</view>
+    <view wx:for = "{{notOver}}" wx:key="item" 
+    data-id="{{item}}" bindtap="goNotOverCheck">
+    zuoye1
+    </view>
+  </block>
+  <block wx:if="{{!noOver}}">
+    <view style="color:red">已结束作业</view>
+    <view wx:for = "{{over}}" wx:key="item" 
+    data-id="{{item}}" bindtap="goOverCheck">
+    zuoye1
+    </view>
+  </block>
+</block>

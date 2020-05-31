@@ -9,7 +9,19 @@
     "pages/getByAuto/getByGA/getByGA",
     "pages/doExercise/doExercise",
     "pages/paperBase/paperBase",
-    "pages/mine/myCollections/myCollections"
+    "pages/mine/myCollections/myCollections",
+    "pages/myClass/myClass",
+    "pages/myClass/addClass/addClass",
+    "pages/myClass/classDetail/classDetail",
+    "pages/myClass/classInfo/classInfo",
+    "pages/myClass/findClass/findClass",
+    "pages/homework/addHomework",
+    "pages/homework/preview/preview",
+    "pages/homework/myHomework/myHomework",
+    "pages/homework/doHomework/doHomework",
+    "pages/myClass/classDetail/check/check",
+    "pages/myClass/classDetail/check/checkStu/checkStu",
+    "pages/myClass/classDetail/check/checkClass/checkClass"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -29,10 +41,20 @@
         "text": "首页"
       },
       {
+        "iconPath": "images/练习.png",
+        "selectedIconPath": "images/练习_填充.png",
         "pagePath": "pages/paperBase/paperBase",
         "text": "试题"
       },
       {
+        "iconPath": "images/班级.png",
+        "selectedIconPath": "images/班级_填充.png",
+        "pagePath": "pages/myClass/myClass",
+        "text": "班级"
+      },
+      {
+        "iconPath": "images/我.png",
+        "selectedIconPath": "images/我_填充.png",
         "pagePath": "pages/userInfo/userInfo",
         "text": "我的"
       }

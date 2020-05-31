@@ -1,0 +1,52 @@
+<block wx:if="{{nowPage==0}}">
+  <view>本卷难度：{{exercise.difficulty}}</view>
+  <button bindtap="seeCheck">查看结果</button>
+</block>
+<block wx:elif="{{nowPage>0&&nowPage<=lastChoice}}">
+  <text>选择题</text>
+  <text>{{nowPage}}. {{exercise.choices[nowPage-1].title}}</text>
+  <radio-group bindchange="radiochange" >
+    <view>
+      <radio disabled="{{!selectEnable}}" value="A" checked="{{checkList[0]}}" style="color:{{color[0]}}"><view>A {{exercise.choices[nowPage-1].opA}}</view>
+      </radio>
+    </view>
+    <view>
+      <radio disabled="{{!selectEnable}}" value="B" checked="{{checkList[1]}}" style="color:{{color[1]}}"><view>B {{exercise.choices[nowPage-1].opB}}</view>
+      </radio>
+    </view><view>
+      <radio disabled="{{!selectEnable}}" value="C" checked="{{checkList[2]}}" style="color:{{color[2]}}"><view>C {{exercise.choices[nowPage-1].opC}}</view>
+      </radio>
+    </view><view>
+      <radio disabled="{{!selectEnable}}" value="D" checked="{{checkList[3]}}" style="color:{{color[3]}}" ><view>D {{exercise.choices[nowPage-1].opD}}</view>
+      </radio>
+    </view>
+  </radio-group>
+  <block wx:if="{{noSelect}}">
+    <view>本题未作答</view>
+    <view>正确答案为：{{trueSelect}}</view>
+  </block>
+  <block wx:if="{{!noSelect}}">
+    <block wx:if="{{rightOrNot}}">
+      <view>回答正确</view>
+      <view>正确答案为：{{trueSelect}}</view>
+    </block>
+    <block wx:if="{{!rightOrNot}}">
+      <view>回答错误</view>
+      <view>正确答案为：{{trueSelect}}  你的答案：{{yourSelect}}</view>
+    </block>
+  </block>
+  <button bindtap="lastPage">上一题</button>
+  <button bindtap="nextPage">下一题</button>
+</block>
+<block wx:elif="{{nowPage>lastChoice&&nowPage<=lastBlank}}">
+  <text>填空题</text>
+  <text>{{nowPage}}. </text>
+  <button bindtap="lastPage">上一题</button>
+  <button bindtap="nextPage">下一题</button>
+</block>
+<block wx:elif="{{nowPage<=lastWordProblem&&nowPage>lastBlank}}">
+  <text>应用题</text>
+  <text>{{nowPage}}. {{exercise.choices[nowPage-1].title}}</text>
+  <button bindtap="lastPage">上一题</button>
+  <button bindtap="nextPage">下一题</button>
+</block>

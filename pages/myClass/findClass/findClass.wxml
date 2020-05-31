@@ -1,0 +1,2 @@
+<input bindinput="setClassId" type="int" placeholder="请输入班级号" name="classId"></input>
+<button bindtap="search">搜索</button>

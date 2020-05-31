@@ -54,7 +54,7 @@ goExercise:function(){
   }
 },
 
-savePaper:function(){
+addCollection:function(){
   var that = this
   var paper = this.data.paper
   console.log(paper)

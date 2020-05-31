@@ -1,0 +1,8 @@
+<button bindtap="findInCollection" wx:if="{{!isbind}}">我的收藏中选取</button>
+
+<block wx:if="{{isbind&&getByCollection}}">
+  <view>我的收藏中选取</view>
+  <view wx:for = "{{paperbase}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDoHomework">
+  {{item.title}}     难度值：{{item.difficulty}}  
+  </view>
+</block>

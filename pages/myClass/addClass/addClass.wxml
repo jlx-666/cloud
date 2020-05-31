@@ -1,0 +1,2 @@
+ <input bindinput="setClassName" type="" placeholder="请输入班级名字" name="name"></input>
+<button bindtap="addClass">完成</button>

@@ -1,0 +1,14 @@
+<view><button bindtap="toAddClass" wx:if="{{userType==1}}">创建班级</button><button bindtap="goFindClass" wx:if="{{userType==0}}">加入班级</button></view>
+<block wx:if="{{!noMyFound&&userType==1}}">
+  <view style="color:red">我管理的班级</view>
+  <view wx:for = "{{myFound}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDetail">
+  {{item.name}}     
+  </view>
+  <view>  </view>
+</block>
+<block wx:if="{{userType==0}}">
+  <view style="color:green">我加入的班级</view>
+  <view wx:for = "{{myJoin}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDetail">
+  {{item.name}}
+  </view>
+</block>
