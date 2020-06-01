@@ -1,11 +1,11 @@
 <block wx:if="{{nowPage==0}}">
   <view>本卷难度：{{exercise.difficulty}}</view>
-  <button bindtap="seeCheck">查看结果</button>
+  <i-button bindtap="seeCheck">查看结果</i-button>
 </block>
 <block wx:elif="{{nowPage>0&&nowPage<=lastChoice}}">
   <text>选择题</text>
   <text>{{nowPage}}. {{exercise.choices[nowPage-1].title}}</text>
-  <radio-group bindchange="radiochange" >
+  <radio-group bindchange="radiochange" class="radio-group-items">
     <view>
       <radio disabled="{{!selectEnable}}" value="A" checked="{{checkList[0]}}" style="color:{{color[0]}}"><view>A {{exercise.choices[nowPage-1].opA}}</view>
       </radio>
@@ -21,32 +21,42 @@
       </radio>
     </view>
   </radio-group>
-  <block wx:if="{{noSelect}}">
-    <view>本题未作答</view>
-    <view>正确答案为：{{trueSelect}}</view>
+  <block wx:if="{{noSelect}}" class="showanswer">
+    <view class="allanswer">
+      <view class="youranswer">本题未作答</view>
+      <view >正确答案为：{{trueSelect}}</view>
+    </view>
   </block>
   <block wx:if="{{!noSelect}}">
-    <block wx:if="{{rightOrNot}}">
-      <view>回答正确</view>
-      <view>正确答案为：{{trueSelect}}</view>
+    <block wx:if="{{rightOrNot}}" class="showanswer">
+      <view  class="allanswer">
+        <view class="youranswer">回答正确</view>
+        <view >正确答案为：{{trueSelect}}</view>
+      </view>
     </block>
-    <block wx:if="{{!rightOrNot}}">
-      <view>回答错误</view>
-      <view>正确答案为：{{trueSelect}}  你的答案：{{yourSelect}}</view>
+    <block wx:if="{{!rightOrNot}}" class="showanswer">
+    <view class="allanswer">
+      <view >回答错误</view>
+      <view >正确答案为：{{trueSelect}}    你的答案：{{yourSelect}}</view>
+    </view>
+      
     </block>
   </block>
-  <button bindtap="lastPage">上一题</button>
-  <button bindtap="nextPage">下一题</button>
+  <view class="btns footer-btn">
+    <i-button class="small-btn" type="primary" bindtap="lastPage">{{'<<上一题'}}</i-button>
+    <text style="font-size:26rpx">（{{nowPage}}/{{lastChoice}}）</text>
+    <i-button class="small-btn" type="primary" bindtap="nextPage">{{'下一题>>'}}</i-button>
+  </view>
 </block>
 <block wx:elif="{{nowPage>lastChoice&&nowPage<=lastBlank}}">
   <text>填空题</text>
   <text>{{nowPage}}. </text>
-  <button bindtap="lastPage">上一题</button>
-  <button bindtap="nextPage">下一题</button>
+  <i-button bindtap="lastPage">上一题</i-button>
+  <i-button bindtap="nextPage">下一题</i-button>
 </block>
 <block wx:elif="{{nowPage<=lastWordProblem&&nowPage>lastBlank}}">
   <text>应用题</text>
   <text>{{nowPage}}. {{exercise.choices[nowPage-1].title}}</text>
-  <button bindtap="lastPage">上一题</button>
-  <button bindtap="nextPage">下一题</button>
+  <i-button bindtap="lastPage">上一题</i-button>
+  <i-button bindtap="nextPage">下一题</i-button>
 </block>

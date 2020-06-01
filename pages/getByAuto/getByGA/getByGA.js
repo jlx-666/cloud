@@ -10,6 +10,7 @@ Page({
     isloading:false,
     paper:null,
     apiLoading: false,
+    id:null
   },
 
   /**
@@ -26,9 +27,17 @@ Page({
     })
   },
   getPaperGA: function () {
+    var difficulty = this.data.difficulty
     if(!this.data.difficulty) {
       $Message({
-        content: '提示',
+        content: '难度值不能为空！',
+        type: 'error'
+      })
+      return
+    }
+    if (difficulty>=1||difficulty<=0) {
+      $Message({
+        content: '难度值超出范围！',
         type: 'error'
       })
       return
@@ -40,16 +49,13 @@ Page({
     wx.request({
       url: 'http://' + getApp().globalData.ipAdress + '/getGA',
       data: {
-        difficulty: this.data.difficulty
+        difficulty: difficulty
       },
       method: 'GET',
       header: {
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        
-        wx.setStorageSync("paper", res.data)
-        console.log(res.data)
         that.setData({
           isloading:true,
           paper:res.data,
@@ -60,14 +66,6 @@ Page({
   },
 
 goExercise:function(){
-  if (this.data.isloading) {
-    wx.navigateTo({
-      url: '/pages/doExercise/doExercise',
-    })
-  }
-},
-
-addCollection:function(){
   var that = this
   var paper = this.data.paper
   console.log(paper)
@@ -81,10 +79,54 @@ addCollection:function(){
       header: {
         'content-type': 'application/json'
       },
-      
+      success: function (res) {
+        var id = res.data
+        that.setData({
+          id: id
+        })
+        if (that.data.isloading) {
+          wx.request({
+            url: 'http://' + getApp().globalData.ipAdress + '/getById',
+            data: {
+              id: that.data.id
+            },
+            success: function (res) {
+              wx.setStorageSync("paper", res.data)
+              console.log(res.data)
+              wx.navigateTo({
+                url: '/pages/doExercise/doExercise',
+              })
+            }
+          })
 
+        }
+      }
+    })
+  }
+  console.log(that.data.id)
+  
+},
+
+save:function(){
+  var that = this
+  var paper = this.data.paper
+  console.log(paper)
+  if (this.data.isloading) {
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/savePaper',
+      data: {
+        paper: JSON.stringify(paper)
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
       success:function(res){
-        console.log(res.data)
+        var id = res.data
+        that.setData({
+          id:id
+        })
+        console.log(id+"id")
       }
     })
   }

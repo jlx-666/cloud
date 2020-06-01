@@ -1,8 +1,7 @@
 <text class="title">输入难度值：</text>
 <input style="margin-left:16rpx" bindinput="setDifficulty" type="digit" placeholder="请输入难度（0.1~0.9），数值越大难度越高" name="difficulty"></input>
 <i-button type="primary" class="footer-btn" bind:click="getPaperGA" loading="{{apiLoading}}">开始组卷</i-button>
-<i-button type="primary" class="footer-btn start-btn" wx:if="{{isloading}}" bind:click="goExercise">开始做题</i-button>
-<i-button type="primary" class="footer-btn" wx:if="{{isloading}}" bind:click="addCollection">推荐试题</i-button>
+<i-button type="primary" class="footer-btn start-btn" wx:if="{{isloading}}" bind:click="goExercise">进入试题</i-button>
 
 <i-message id="message"></i-message>
 

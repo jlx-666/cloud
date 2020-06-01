@@ -68,7 +68,7 @@ Page({
       var b = that.data.paperAnswer
       var checklist = new Array(false, false, false, false)
       var color = new Array('black', 'black', 'black', 'black')
-      switch (b.get(nowpage - 1)) {
+      switch (a.get(nowpage - 1)) {
         case "A":
           color[0] = 'red'
           break;
@@ -82,7 +82,7 @@ Page({
           color[3] = 'red'
           break;
       }
-      switch (a.get(nowpage - 1)) {
+      switch (b.get(nowpage - 1)) {
         case "A":
           checklist[0] = true
           color[0] = 'green'
@@ -160,7 +160,7 @@ Page({
       var b = that.data.paperAnswer
       var checklist = new Array(false, false, false, false)
       var color = new Array('black', 'black', 'black', 'black')
-      switch (b.get(nowpage + 1)) {
+      switch (a.get(nowpage + 1)) {
         case "A":
           color[0] = 'red'
           break;
@@ -174,7 +174,7 @@ Page({
           color[3] = 'red'
           break;
       }
-      switch (a.get(nowpage + 1)) {
+      switch (b.get(nowpage + 1)) {
         case "A":
           checklist[0] = true
           color[0] = 'green'
