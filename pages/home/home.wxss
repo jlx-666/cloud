@@ -5,11 +5,29 @@
   margin-left: 10rpx;
 
 }
+i-cell{
+  width: 100%;
+}
 .hard-title {
   color: #495060;
   margin-left: 10rpx;
+  width: 80%
 }
 
 .hard-val {
+  text-align: right;
   color: #19be6b;
+  width: 20%
+}
+.form-title{
+  display: flex;
+  width: 100%;
+}
+.item-title{
+  padding-left: 15px;
+  width: 80%;
+}
+.item-dif{
+  width: 20%;
+
 }

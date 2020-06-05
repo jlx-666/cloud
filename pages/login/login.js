@@ -18,6 +18,9 @@ Page({
             app.globalData.userInfo = res.userInfo;
           }
         });
+        console.log(app.globalData.userInfo)
+
+    
         var appid ='wxe1cc7f0f4f8dc8a9'
         var secret ='92872351035dc74e68fd7b9f3767a3d1'
         var l = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appid + '&secret=' + secret + '&js_code=' + res.code + '&grant_type=authorization_code';
@@ -49,7 +52,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success:function(res){
-        console.log("1++"+res.data)
         wx.switchTab({
           url: '/pages/home/home',
         })
@@ -60,12 +62,16 @@ Page({
   getStudentId: function (e) {
     app.globalData.userType = 0
     wx.login({
+      
       success: function (res) {
+        console.log('stusuc')
         wx.getUserInfo({
           success: function (res) {
             app.globalData.userInfo = res.userInfo;
+            console.log(res.userInfo+'suc')
           }
         });
+        
         var appid = 'wxe1cc7f0f4f8dc8a9'
         var secret = '92872351035dc74e68fd7b9f3767a3d1'
         var l = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appid + '&secret=' + secret + '&js_code=' + res.code + '&grant_type=authorization_code';
@@ -78,31 +84,32 @@ Page({
             var obj = {};
             obj.openid = res.data.openid;
             app.globalData.openid = obj.openid
-            wx.setStorageSync('user', obj);//存储openid  
+            wx.setStorageSync('user', obj);//存储openid 
+            var obj = wx.getStorageSync('user');
+            console.log(obj.openid)
+            wx.request({
+              url: 'http://' + getApp().globalData.ipAdress + '/login',
+              data: {
+                openid: obj.openid,
+                name: app.globalData.userInfo.nickName,
+                type: 0
+              },
+              method: 'GET',
+              header: {
+                'content-type': 'application/json' // 默认值
+              },
+              success: function (res) {
+                wx.switchTab({
+                  url: '/pages/home/home',
+                })
+              }
+            }) 
           }
         });
 
       }
     })
-    var obj = wx.getStorageSync('user');
-    wx.request({
-      url: 'http://' + getApp().globalData.ipAdress + '/login',
-      data: {
-        openid: obj.openid,
-        name: app.globalData.userInfo.nickName,
-        type:0
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log("1++" + res.data)
-        wx.switchTab({
-          url: '/pages/home/home',
-        })
-      }
-    })
+    
   },
   /**
    * 生命周期函数--监听页面加载

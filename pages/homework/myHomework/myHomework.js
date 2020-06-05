@@ -104,6 +104,26 @@ Page({
     })
   },
 
+  goCheck: function (e) {
+    var homework = e.currentTarget.dataset.item;
+    var id = homework.paper_id;
+    console.log(id)
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/getById',
+      data: {
+        id: id
+      },
+      success: function (res) {
+        wx.setStorageSync("paper", res.data)
+        wx.setStorageSync("homework", homework),
+          console.log(res.data)
+        wx.navigateTo({
+          url: '/pages/myClass/classDetail/check/checkStu/checkStu',
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

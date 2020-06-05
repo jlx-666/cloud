@@ -1,1 +1,24 @@
-/* pages/myClass/classDetail/check/check.wxss */
+.btns {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.small-btn {
+  width: 40%;
+
+}
+.radio-group-items > view {
+  margin-top: 30rpx;
+}
+
+.allanswer{
+  display:flex;
+  justify-content: center; 
+  flex-direction: column;
+  margin-top: 60rpx;
+  margin-left: 10%;
+  background-color:#CCCCCC;
+  width: 80%;
+}

@@ -7,7 +7,7 @@
 </block>
 <block wx:if="{{!noHaveDone}}">
   <view style="color:red">已完成作业</view>
-  <view wx:for = "{{haveDone}}"wx:key="item.paper_id"  data-item="{{item}}"  bindtap="goDoHomework">
+  <view wx:for = "{{haveDone}}"wx:key="item.paper_id"  data-item="{{item}}"  bindtap="goCheck">
   {{item.paper_id}}     
   </view>
   <view>  </view>

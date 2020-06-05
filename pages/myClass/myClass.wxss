@@ -1,1 +1,5 @@
-/* pages/myClass/myClass.wxss */
+image{
+  width: 100rpx;
+  height: 160rpx
+
+}

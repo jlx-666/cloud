@@ -1,1 +1,14 @@
-/* pages/homework/doHomework/doHomework.wxss */
+.btns {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.small-btn {
+  width: 40%;
+
+}
+.radio-group-items > view {
+  margin-top: 30rpx;
+}

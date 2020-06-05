@@ -1,8 +1,12 @@
 <view class="title">试卷推荐</view>
 <i-cell-group>
+  <view class="form-title">
+    <text class="item-title">试卷</text>
+    <text class="item-dif">难度</text>
+  </view>
   <i-cell wx:for = "{{paperbases}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goExercise">
-    <text>{{item.title}}</text>     
-    <text class="hard-title">难度值：<text class="hard-val">{{item.difficulty}}</text></text>
+    <text class="hard-title">{{item.title}}</text>     
+    <text class="hard-val">{{item.difficulty}}</text>
   </i-cell>
 </i-cell-group>
 

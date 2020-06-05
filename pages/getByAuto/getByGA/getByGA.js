@@ -10,6 +10,7 @@ Page({
     isloading:false,
     paper:null,
     apiLoading: false,
+    countChoice:10,
     id:null
   },
 
@@ -26,8 +27,14 @@ Page({
       difficulty: e.detail.value
     })
   },
+  setCountChoice: function (e) {
+    this.setData({
+      countChoice: e.detail.value
+    })
+  },
   getPaperGA: function () {
     var difficulty = this.data.difficulty
+    var countChoice = this.data.countChoice
     if(!this.data.difficulty) {
       $Message({
         content: '难度值不能为空！',
@@ -42,6 +49,13 @@ Page({
       })
       return
     }
+    if (countChoice > 20 ||countChoice < 5) {
+      $Message({
+        content: '题目数量不符合范围！',
+        type: 'error'
+      })
+      return
+    }
     var that = this;
     this.setData({
       apiLoading: true
@@ -49,7 +63,8 @@ Page({
     wx.request({
       url: 'http://' + getApp().globalData.ipAdress + '/getGA',
       data: {
-        difficulty: difficulty
+        difficulty: difficulty,
+        countChoice:countChoice
       },
       method: 'GET',
       header: {
