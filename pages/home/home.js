@@ -12,10 +12,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: '首页',
+    })
     var that = this
     wx.request({
       url: 'http://' + getApp().globalData.ipAdress + '/getPaperIds',
-
+      data: {
+        size: 10
+      },
       method: 'GET',
       header: {
         'content-type': 'application/json'

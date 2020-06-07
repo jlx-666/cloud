@@ -26,6 +26,9 @@ Page({
       detail:wx.getStorageSync("detail"),
       userType:getApp().globalData.userType
     })
+    wx.setNavigationBarTitle({
+      title: that.data.detail.name + '(' + that.data.detail.id + ')',
+    })
     wx.request({
       url: 'http://' + getApp().globalData.ipAdress + '/judgeWho',
       data: {

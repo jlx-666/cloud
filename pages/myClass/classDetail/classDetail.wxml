@@ -13,7 +13,7 @@
   <block wx:if="{{!noOver}}">
     <view style="color:red">已结束作业</view>
     <view wx:for = "{{homeworkOver}}" wx:key="item.paperId" data-item="{{item}}" bindtap="goCheck">
-    <image src="../../images/homework.jpg">
+    <image src="../../../images/homework.jpg">
     </image>
     zuoye2
     </view>
