@@ -1,5 +1,31 @@
 image{
-  width: 100rpx;
+  width: 160rpx;
   height: 160rpx
 
+}
+
+.class-name {
+  font-size: 36rpx;
+  margin-left: 16rpx;
+}
+
+.class-title {
+  font-size: 40rpx;
+  margin: 10rpx 0 10rpx 20rpx;
+}
+
+.class-box {
+  display: flex;
+  align-items: center;
+  margin-right: 25rpx;
+  margin-left: 25rpx;
+  background: #fff;
+  height: 200rpx;
+  padding: 0 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.app-container {
+  background: #f9f9f9;
+  min-height: 100vh;
 }

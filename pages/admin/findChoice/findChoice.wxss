@@ -16,3 +16,18 @@
 input{
   width: 30rpx
 }
+.choice-box {
+  height: 80rpx;
+}
+.choice-box > text:first-child {
+  display: inline-block;
+  width: 13%;
+}
+.choice-box > text:nth-child(2) {
+  display: inline-block;
+  width: 73%;
+}
+.choice-box > text:last-child {
+  display: inline-block;
+  width: 13%;
+}

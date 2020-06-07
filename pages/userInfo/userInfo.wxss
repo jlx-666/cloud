@@ -5,12 +5,20 @@
 }
 
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 250rpx;
+  height: 250rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
 
 .userinfo-nickname {
   color: #aaa;
+}
+
+.footer-btn {
+  position: fixed;
+  bottom: 30rpx;
+  left: 0;
+  right: 0;
+  width: 100%;
 }

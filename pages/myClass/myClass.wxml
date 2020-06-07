@@ -1,13 +1,15 @@
-<view><button bindtap="toAddClass">创建班级</button><button bindtap="goFindClass" >搜索班级</button></view>
+<view class="app-container">
+<view><i-button type="primary"  bindtap="toAddClass" >创建班级</i-button><i-button  type="success" bindtap="goFindClass" >搜索班级</i-button></view>
 <block >
-  <view style="color:red">我管理的班级</view>
-  <view wx:for = "{{myFound}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDetail">
-   <image src="../../images/class.jpg"></image> <text>{{item.name}}</text> 
+  <view style="color:red" class="class-title">我管理的班级</view>
+  <view class="class-box" wx:for = "{{myFound}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDetail">
+   <image src="../../images/class.jpg"></image> <text class="class-name">{{item.name}}</text> 
   </view>
 </block>
 <block >
-  <view style="color:green">我加入的班级</view>
-  <view wx:for = "{{myJoin}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDetail">
-  <image src="../../images/class.jpg"></image> <text>{{item.name}}</text> 
+  <view style="color:green" class="class-title">我加入的班级</view>
+  <view class="class-box" wx:for = "{{myJoin}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDetail">
+  <image src="../../images/class.jpg"></image> <text class="class-name">{{item.name}}</text> 
   </view>
 </block>
+</view>

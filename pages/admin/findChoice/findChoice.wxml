@@ -1,6 +1,8 @@
 <view><text>id</text><text>题目</text><text>难度</text></view>
-<view wx:for = "{{list}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDetail">
+<view style="height: calc(100vh - 200rpx);overflow-y:auto">
+<view class="choice-box" wx:for = "{{list}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDetail">
    <text>{{item.id}}</text><text>{{item.title}}</text><text>{{item.difficulty}}</text>
+</view>
 </view>
 <view class="btns footer-btn">
     <i-button class="small-btn" type="primary" bindtap="lastPage">{{'<<上一页'}}</i-button>

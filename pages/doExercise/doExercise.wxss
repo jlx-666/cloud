@@ -1,6 +1,9 @@
 /* pages/doExercise/doExercise.wxss */
 .page-container {
   padding: 30rpx 16rpx 0 16rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .diff-value {
@@ -8,7 +11,8 @@
   font-size: 30rpx;
 }
 .page-name {
-  font-size: 36rpx;
+  font-size: 40rpx;
+  margin-bottom: 40rpx;
 }
 .start-btn {
   bottom: 130rpx;

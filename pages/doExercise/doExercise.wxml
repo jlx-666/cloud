@@ -1,8 +1,8 @@
 <view class="page-container">
 <block wx:if="{{nowPage==0}}">
   <view class="page-name">{{exercise.title}}此处为试卷标题</view>
-  <image src="../../images/paper.jpg"></image>
-  <view class="page-name" >本卷难度：<text class="diff-value">{{exercise.difficulty}}</text></view>
+  <image src="../../images/paper.jpg" style="margin-top:20rpx"></image>
+  <view class="page-name" style="margin-top:20rpx">本卷难度：<text class="diff-value">{{exercise.difficulty}}</text></view>
   <i-button wx:if="{{!saveState}}" type="success" class="footer-btn" bindtap="addCollection">收藏</i-button>
   <i-button wx:if="{{saveState}}" type="info" class="footer-btn" bindtap="dropCollection">取消收藏</i-button>
   <i-button wx:if="{{saveState}}" bindtap="confirm">查看答案</i-button>
