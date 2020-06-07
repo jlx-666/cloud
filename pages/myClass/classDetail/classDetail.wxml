@@ -5,13 +5,16 @@
   
   <block wx:if="{{!noNotOver}}">
     <view style="color:green">未结束作业</view>
-    <view wx:for = "{{homeworkNotOver}}" wx:key="item.paperId" data-item="{{item}}" bindtap="goDoHomework"><image src="../../images/homework.jpg"></image>
-    zuoye1
+    <view wx:for = "{{homeworkNotOver}}" wx:key="item.paperId" data-item="{{item}}" bindtap="goDoHomework">
+    <image src="../../images/homework.jpg"></image>
+    <text>未完成作业</text>
     </view>
   </block>
   <block wx:if="{{!noOver}}">
     <view style="color:red">已结束作业</view>
-    <view wx:for = "{{homeworkOver}}" wx:key="item.paperId" data-item="{{item}}" bindtap="goCheck"><image src="../../images/homework.jpg"></image>
+    <view wx:for = "{{homeworkOver}}" wx:key="item.paperId" data-item="{{item}}" bindtap="goCheck">
+    <image src="../../images/homework.jpg">
+    </image>
     zuoye2
     </view>
   </block>
@@ -26,7 +29,8 @@
   <block wx:if="{{!noNotOver}}">
     <view style="color:green">未结束作业</view>
     <view wx:for = "{{notOver}}" wx:key="item" 
-    data-id="{{item}}" bindtap="goNotOverCheck"><image src="../../images/homework.jpg"></image>
+    data-id="{{item}}" bindtap="goNotOverCheck">
+    <image src="../../images/homework.jpg"></image>
     zuoye1
     </view>
   </block>
@@ -34,7 +38,8 @@
     <view style="color:red">已结束作业</view>
     <view wx:for = "{{over}}" wx:key="item" 
     data-id="{{item}}" bindtap="goOverCheck">
-    <image src="../../images/homework.jpg"></image>
+    <image src="../../images/homework.jpg">
+    </image>
     zuoye1
     </view>
   </block>

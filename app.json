@@ -19,7 +19,12 @@
     "pages/homework/myHomework/myHomework",
     "pages/homework/doHomework/doHomework",
     "pages/myClass/classDetail/check/check",
-    "pages/myClass/classDetail/check/checkStu/checkStu"
+    "pages/myClass/classDetail/check/checkStu/checkStu",
+    "pages/admin/addChoice/add",
+    "pages/admin/admin",
+    "pages/admin/findChoice/findChoice",
+    "pages/admin/findChoice/changeChoice/change",
+    "pages/admin/paper/paper"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -38,7 +43,6 @@
         "pagePath": "pages/home/home",
         "text": "首页"
       },
-     
       {
         "iconPath": "images/班级.png",
         "selectedIconPath": "images/班级_填充.png",

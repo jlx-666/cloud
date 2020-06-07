@@ -1,0 +1,3 @@
+<button bindtap="goAdd">addChoice</button>
+<button bindtap="goSearch">findChoice</button>
+<button bindtap="goPaper">findPaper</button>

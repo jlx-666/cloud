@@ -1,0 +1,35 @@
+<view>
+  <text>考题：</text><input style="margin-left:16rpx" bindinput="setTitle"  placeholder="请在此处输入题目" name="title"></input>
+</view>
+<view>
+  <text>A:</text><input style="margin-left:16rpx" bindinput="setOpA"  placeholder="请输入A选项内容" name="opA"></input>
+</view>
+<view>
+  <text>B:</text><input style="margin-left:16rpx" bindinput="setOpB"  placeholder="请输入B选项内容" name="opB"></input>
+</view>
+<view>
+  <text>C:</text><input style="margin-left:16rpx" bindinput="setOpC"  placeholder="请输入C选项内容" name="opC"></input>
+</view>
+<view>
+  <text>D:</text><input style="margin-left:16rpx" bindinput="setOpD"  placeholder="请输入D选项内容" name="opD"></input>
+</view>
+ <radio-group bindchange="radiochange" class="radio-group-items">
+    <view>
+      <text>A</text><radio value="A" >
+      </radio>
+    </view>
+    <view>
+      <text>B</text><radio value="B" ></radio>
+    </view>
+    <view>
+      <text>C</text><radio value="C" ></radio>
+    </view>
+    <view>
+      <text>D</text><radio value="D" ></radio>
+    </view>
+  </radio-group>
+  <view>
+  <text>难度值:</text><input style="margin-left:16rpx" bindinput="setDif"  placeholder="请输入该题难度值" name="difficulty"></input>
+</view>
+  <button bindtap="commit">commit</button>
+  <i-message id="message"></i-message>
