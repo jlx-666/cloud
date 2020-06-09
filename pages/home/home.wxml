@@ -1,4 +1,4 @@
-<view class="title">试卷推荐</view>
+<view class="title">试卷推荐<image src="../../images/刷新.gif" bindtap="getPaperIds"></image></view>
 <i-cell-group>
   <view class="form-title">
     <text class="item-title">试卷</text>

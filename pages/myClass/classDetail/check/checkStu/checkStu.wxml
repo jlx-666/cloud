@@ -1,6 +1,10 @@
 <block wx:if="{{nowPage==0}}">
-  <view>本卷难度：{{exercise.difficulty}}</view>
-  <i-button bindtap="seeCheck">查看结果</i-button>
+<view class="page-container">
+<view class="page-name">{{exercise.title}}</view>
+<image class="images" src="../../../../../images/homework.jpg"></image>
+  <view style="margin-top:20rpx">本卷难度：{{exercise.difficulty}}</view>
+  <i-button bindtap="seeCheck" class="footer-btn" type="primary">查看结果</i-button>
+</view>
 </block>
 <block wx:elif="{{nowPage>0&&nowPage<=lastChoice}}">
   <text>选择题</text>

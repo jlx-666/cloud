@@ -3,7 +3,7 @@
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname" bindtap="showChangeName">{{nickname}}</text>
+      <view class="userinfo-nickname" bindtap="showChangeName"><text>{{nickname}}</text><image src="../../images/修改.jpg" class="images"></image></view>
       <modal hidden="{{hiddenChangeName}}" title="请输入名字" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
      <input bindinput="setNewName" type="String" name="name"></input>
    </modal>

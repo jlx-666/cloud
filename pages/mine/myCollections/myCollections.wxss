@@ -1,1 +1,30 @@
-/* pages/mine/myCollections/myCollections.wxss */
+i-cell{
+  width: 100%;
+}
+.hard-title {
+  color: #495060;
+  margin-left: 10rpx;
+  width: 85%;
+  display: inline-block;
+}
+
+.hard-val {
+  text-align: left;
+  color: #19be6b;
+  width: 10%;
+  display: inline-block;
+}
+.form-title{
+  display: flex;
+  width: 100%;
+}
+.item-title{
+  margin-left: 10rpx;
+  width: 80%;
+  display: inline-block;
+}
+.item-dif{
+  text-align: left;
+  width: 10%;
+  display: inline-block;  
+}

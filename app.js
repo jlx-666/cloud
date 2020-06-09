@@ -38,8 +38,8 @@ App({
     openid:null,
     name:null,
     userType:0,
-    // ipAdress:"127.0.0.1:8080"
-    ipAdress:'3192io8032.zicp.vip'
+    ipAdress:"127.0.0.1:8080"
+    //ipAdress:'3192io8032.zicp.vip'
   },
  
 

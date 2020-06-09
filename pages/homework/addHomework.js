@@ -3,7 +3,7 @@ Page({
 
   data: {
     classId:null,
-    isbind:false,
+    isbind:true,
     getByCollection:false,
     getByGA:false,
     isloading: false,
@@ -31,6 +31,7 @@ Page({
           paperbase: paperbase,
           classId:classId
         })
+        that.findInCollection()
       }
     })
     

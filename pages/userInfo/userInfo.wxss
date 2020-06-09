@@ -13,6 +13,7 @@
 
 .userinfo-nickname {
   color: #aaa;
+  font-size: 60rpx;
 }
 
 .footer-btn {
@@ -21,4 +22,8 @@
   left: 0;
   right: 0;
   width: 100%;
+}
+.images{
+  width: 50rpx;
+  height: 50rpx
 }

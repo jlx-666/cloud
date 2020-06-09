@@ -11,7 +11,8 @@
   font-size: 30rpx;
 }
 .page-name {
-  font-size: 40rpx;
+  margin-top: 80rpx;
+  font-size: 50rpx;
   margin-bottom: 40rpx;
 }
 .start-btn {
@@ -27,7 +28,18 @@
   justify-content: space-between;
   align-items: center;
 }
+.a-btn{
+  width: 50%;
+}
+.answer-btn {
+  width: 50%;
+
+}
 .small-btn {
   width: 40%;
 
+}
+.images{
+  width:60%;
+  margin-top:50rpx
 }

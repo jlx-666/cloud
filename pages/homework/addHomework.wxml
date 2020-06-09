@@ -2,7 +2,14 @@
 
 <block wx:if="{{isbind&&getByCollection}}">
   <view>我的收藏中选取</view>
-  <view wx:for = "{{paperbase}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDoHomework">
-  {{item.title}}     难度值：{{item.difficulty}}  
+  <i-cell-group>
+  <view class="form-title">
+    <text class="item-title">试卷</text>
+    <text class="item-dif">难度</text>
   </view>
+  <i-cell wx:for = "{{paperbase}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDoHomework">
+    <text class="hard-title">{{item.title}}</text>     
+    <text class="hard-val">{{item.difficulty}}</text>
+  </i-cell>
+</i-cell-group>
 </block>

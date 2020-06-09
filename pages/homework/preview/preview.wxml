@@ -1,6 +1,10 @@
 <block wx:if="{{nowPage==0}}">
-  <view>本卷难度：{{exercise.difficulty}}</view>
-  <i-button bindtap="nextPage">预览</i-button>
+<view class="page-container">
+<view class="page-name">{{exercise.title}}</view>
+<image class="images" src="../../../images/paper.jpg"></image>
+  <view style="margin-top:20rpx">本卷难度：{{exercise.difficulty}}</view>
+  <i-button bindtap="nextPage" type="primary" class="footer-btn">预览</i-button>
+</view>
 </block>
 <block wx:elif="{{nowPage>0&&nowPage<=lastChoice}}">
   <text>选择题</text>
@@ -39,7 +43,7 @@
   <i-button bindtap="lastPage">上一题</i-button>
   <i-button bindtap="nextPage">下一题</i-button>
 </block>
-<i-button bindtap="setTime" >发布</i-button>
+<i-button bindtap="setTime" type="success" style="bottom: 150rpx" class="footer-btn">发布</i-button>
 <modal hidden="{{hiddenSetTime}}" title="请输入时间" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
   <view class="timecontent">
      <input bindinput="setDay" type="number" name="name"style="flex:1"></input><view style="flex:1；width:20px">天</view>

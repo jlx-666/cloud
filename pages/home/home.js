@@ -15,22 +15,8 @@ Page({
     wx.setNavigationBarTitle({
       title: '首页',
     })
-    var that = this
-    wx.request({
-      url: 'http://' + getApp().globalData.ipAdress + '/getPaperIds',
-      data: {
-        size: 10
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          paperbases: res.data
-        })
-      }
-    })
+    
+    this.getPaperIds()
   },
 
 
@@ -55,6 +41,25 @@ Page({
       wx.navigateTo({
         url: '../getByAuto/getByGA/getByGA'
       })
+  },
+
+  getPaperIds:function(){
+    var that = this
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/getPaperIds',
+      data: {
+        size: 10
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        that.setData({
+          paperbases: res.data
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

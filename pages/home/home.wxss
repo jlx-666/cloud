@@ -11,14 +11,14 @@ i-cell{
 .hard-title {
   color: #495060;
   margin-left: 10rpx;
-  width: 20%;
+  width: 85%;
   display: inline-block;
 }
 
 .hard-val {
   text-align: left;
   color: #19be6b;
-  width: 70%;
+  width: 10%;
   display: inline-block;
 }
 .form-title{
@@ -26,10 +26,16 @@ i-cell{
   width: 100%;
 }
 .item-title{
-  padding-left: 15px;
+  margin-left: 10rpx;
   width: 80%;
+  display: inline-block;
 }
 .item-dif{
-  width: 20%;
-
+  text-align: left;
+  width: 10%;
+  display: inline-block;  
+}
+image{
+  width: 40rpx;
+  height: 40rpx;
 }

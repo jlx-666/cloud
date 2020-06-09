@@ -5,6 +5,13 @@
   justify-content: space-between;
   align-items: center;
 }
+.footer-btn {
+  position: fixed;
+  bottom: 30rpx;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
 .small-btn {
   width: 40%;
 
@@ -21,4 +28,19 @@
   margin-left: 10%;
   background-color:#CCCCCC;
   width: 80%;
+}
+.images{
+  width:60%;
+  margin-top:50rpx
+}
+.page-container {
+  padding: 30rpx 16rpx 0 16rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.page-name {
+  margin-top: 80rpx;
+  font-size: 50rpx;
+  margin-bottom: 40rpx;
 }

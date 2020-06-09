@@ -1,1 +1,23 @@
-/* pages/myClass/classDetail/classDetail.wxss */
+image{
+  width: 160rpx;
+  height: 160rpx
+
+}
+.Homework-box {
+  display: flex;
+  align-items: center;
+  margin-right: 25rpx;
+  margin-left: 25rpx;
+  background: #fff;
+  height: 200rpx;
+  padding: 0 20rpx;
+  margin-bottom: 16rpx;
+}
+.Homework-name {
+  font-size: 36rpx;
+  margin-left: 16rpx;
+}
+.app-container {
+  background: #f9f9f9;
+  min-height: 100vh;
+}
