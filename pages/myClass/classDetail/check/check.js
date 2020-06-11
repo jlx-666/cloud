@@ -5,7 +5,6 @@ Page({
   data: {
     nowCheck:false,
     homeworkOver:false,
-    userType: 1,
     classId: null,
     exercise: null,
     nowPage: 0,
@@ -35,7 +34,6 @@ Page({
   onLoad: function (options) {
     var that = this
     var data = wx.getStorageSync("paper")
-    console.log(data)
     var choicesLength = data.choices.length
     var blanksLength = data.blanks.length
     var wordProblemLength = data.wordProblems.length
@@ -47,7 +45,6 @@ Page({
       lastBlank: choicesLength + blanksLength,
       lastWordProblem: choicesLength + blanksLength + wordProblemLength,
       classId: wx.getStorageSync("detail").id,
-      userType:app.globalData.userType
     })
     if(!this.data.homeworkOver){
       wx.request({
@@ -67,7 +64,6 @@ Page({
         }
       })
     }
-    console.log(this.data.classId)
     var paperId = this.data.exercise.id
     var openId = app.globalData.openid
     this.getPaperAnswer()
@@ -279,9 +275,11 @@ Page({
       console.log("初始")
     }
     console.log(this.data.answer)
-    this.setData({
-      nowPage: that.data.nowPage + 1,
-    })
+    if (nowpage < this.data.lastWordProblem) {
+      this.setData({
+        nowPage: that.data.nowPage + 1,
+      })
+    }
   },
  /*radiochange: function (e) {
     answer = e.detail.value
@@ -306,6 +304,12 @@ Page({
       success: function (res) {
         that.setData({
           homeworkOver: true,
+        })
+        var pages = getCurrentPages();
+        var beforePage = pages[pages.length - 2];
+        beforePage.onLoad();
+        wx.navigateBack({
+          delta: 1,
         })
       }
     })

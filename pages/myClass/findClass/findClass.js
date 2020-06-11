@@ -27,10 +27,20 @@ Page({
           'content-type': 'application/x-www-form-urlencoded'
         },
         success: function (res) {
-          wx.setStorageSync("detail", res.data)
-          wx.navigateTo({
-            url: '/pages/myClass/classDetail/classDetail',
-          })
+          if (res.data != ""){
+            console.log(res.data)
+            wx.setStorageSync("detail", res.data)
+            wx.navigateTo({
+              url: '/pages/myClass/classDetail/classDetail',
+            })
+          }
+          else{
+            wx.showToast({
+              title: '不存在该班级',
+              icon: 'none',
+              duration:1000,
+            })
+          }
         }
       })
     }

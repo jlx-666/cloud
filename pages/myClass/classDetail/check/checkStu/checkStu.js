@@ -148,6 +148,7 @@ Page({
   },
 
   nextPage: function () {
+
     var that = this
     var nowpage = this.data.nowPage
     console.log(nowpage + 1)
@@ -232,9 +233,11 @@ Page({
       console.log("初始")
     }
     console.log(this.data.answer)
-    this.setData({
-      nowPage: that.data.nowPage + 1,
-    })
+    if (nowpage < this.data.lastWordProblem) {
+      this.setData({
+        nowPage: that.data.nowPage + 1,
+      })
+    }
   },
 
   seeCheck:function(){
@@ -251,7 +254,10 @@ Page({
     var paperId = this.data.exercise.id
     var openId = app.globalData.openid
     var answerMap
-    if (wx.getStorageSync("checkCollection")) {
+    var checkType = wx.getStorageSync("checkType")
+    console.log(checkType == 'exercise')
+    if(checkType=='collection'){
+      console.log("第一个")
       wx.request({
         url: 'http://' + getApp().globalData.ipAdress + '/getAnswer',
         method: 'POST',
@@ -275,8 +281,8 @@ Page({
           })
         }
       })
-    }
-    else {
+    }else if (checkType == 'homework'){
+      console.log("2")
       wx.request({
         url: 'http://' + getApp().globalData.ipAdress + '/getHomeworkAnswer',
         method: 'POST',
@@ -301,6 +307,18 @@ Page({
           })
         }
       })
+    }else{
+      answer = JSON.parse(wx.getStorageSync("eAnswer")) 
+      let strMap = new Map();
+      for (let k of Object.keys(answer)) {
+        let key = parseInt(k)
+        strMap.set(key, answer[k]);
+      that.setData({
+        answer: strMap
+      })
+        console.log("answer")
+      console.log(that.data.answer)
+    }
     }
   },
 

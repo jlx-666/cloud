@@ -5,7 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    title:"",
+    difficulty:"",
+    opA :"",
+    opB: "",
+    opC: "",
+    opD: "",
   },
 
   /**
@@ -73,7 +78,14 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.log("suc add")
+        wx.showToast({
+          title: '添加成功',
+          icon: 'success',
+          duration: 1000
+        })
+        wx.redirectTo({
+          url: '/pages/admin/addChoice/add',
+        })
       }
     })
   },

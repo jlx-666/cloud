@@ -1,18 +1,18 @@
-<view><text>id</text><text>题目</text><text>难度</text></view>
+<view class="title"><text class="title-id">id</text><text class="title-title">题目</text><text class="title-diff">难度</text></view>
 <view style="height: calc(100vh - 200rpx);overflow-y:auto">
-<view class="choice-box" wx:for = "{{list}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDetail">
+<view class="choice-box" wx:for = "{{list}}" wx:key="item.id" data-id="{{item.id}}" bindtap="changeChoice">
    <text>{{item.id}}</text><text>{{item.title}}</text><text>{{item.difficulty}}</text>
 </view>
 </view>
 <view class="btns footer-btn">
     <i-button class="small-btn" type="primary" bindtap="lastPage">{{'<<上一页'}}</i-button>
-    <text style="font-size:26rpx" bindtap="goPage">（{{page+1}}/{{maxPage}}）</text>
-    <i-button class="small-btn" type="primary" bindtap="nextPage">{{'下一页>>'}}</i-button>
+    <text style="font-size:26rpx" bindtap="goPage" type="number">（{{page+1}}/{{maxPage}}）</text>
+    <i-button class="small-btn" type="primary" bindtap="nextPage" >{{'下一页>>'}}</i-button>
 </view>
-<modal hidden="{{hiddenModal}}" title="页面跳转" confirm-text="跳转" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
-  <view class="modal">
-     <view style="flex:3">跳转到第</view><input bindinput="setPage" type="number" name="name" 
-     style="flex:1;width:30px"></input><view style="flex:3；width:20px">页</view>
+<modal hidden="{{hiddenModal}}" title="页面跳转" confirm-text="跳转" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" >
+  <view class="modal-items">
+     <view>跳转到第</view><view class="inputView"><input bindinput="setPage" type="number" name="name" 
+     style="flex:1;width:30px"></input></view><view>页</view>
   </view>
-   </modal>
+  </modal>
      <i-message id="message"></i-message>

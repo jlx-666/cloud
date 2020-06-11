@@ -124,12 +124,14 @@ Page({
     } else {
       console.log("初始")
     }
-    this.setData({
-      nowPage: that.data.nowPage + 1,
-    })
+    if (nowpage < this.data.lastWordProblem) {
+      this.setData({
+        nowPage: that.data.nowPage + 1,
+      })
+    }
   },
   radiochange: function (e) {
-    answer = e.detail.value
+    var answer = e.detail.value
   },
 
   addHomework:function(){
@@ -156,6 +158,12 @@ Page({
       success: function (res) {
         that.setData({
           saveState: res.data
+        })
+        var pages = getCurrentPages();
+        var beforePage = pages[pages.length - 3];
+        beforePage.onLoad();
+        wx.navigateBack({
+          delta: 2,
         })
       }
     })

@@ -26,6 +26,21 @@ Page({
       hasUserInfo: true,
     })
     wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/judgeAdmin',
+      data: {
+        openid: getApp().globalData.openid
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+          that.setData({
+            administrator:res.data
+          })
+      }
+    }),
+    wx.request({
       url: 'http://' + getApp().globalData.ipAdress + '/getNameById',
       data: {
         openid: getApp().globalData.openid
@@ -63,7 +78,11 @@ Page({
       url: '/pages/homework/myHomework/myHomework',
     })
   },
- 
+  goAdmin: function () {
+    wx.navigateTo({
+      url: '/pages/admin/admin',
+    })
+  },
 
   showChangeName: function () {
     this.setData({

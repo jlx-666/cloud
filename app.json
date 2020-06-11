@@ -24,7 +24,8 @@
     "pages/admin/admin",
     "pages/admin/findChoice/findChoice",
     "pages/admin/findChoice/changeChoice/change",
-    "pages/admin/paper/paper"
+    "pages/admin/paper/paper",
+    "pages/admin/paper/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

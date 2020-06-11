@@ -1,13 +1,15 @@
-// pages/myClass/classDetail/classDetail.js
+const { $Message } = require('../../../dist/base/index');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    hiddenLeave:true,
+    hiddenDelete:true,
     userType:{},
     detail:null,
-    who:"notJoin",
+    who:null,
     teacher:null,
     homeworkOver:null,
     homeworkNotOver:null,
@@ -86,7 +88,7 @@ Page({
               }
             },
           })
-        }else{
+        } else if (that.data.who =='student'){
           wx.request({
             url: 'http://' + getApp().globalData.ipAdress + '/changeSomeoneState',//HomeworkController
             data: {
@@ -143,6 +145,8 @@ Page({
               })
             }
           })
+        }else{
+          that.getNotJoinInfo()
         }
         
       },  
@@ -251,6 +255,7 @@ Page({
         id: id
       },
       success: function (res) {
+        wx.setStorageSync("checkType", 'homework')
         wx.setStorageSync("paper", res.data)
         wx.setStorageSync("homework", homework),
         console.log(res.data)
@@ -262,6 +267,8 @@ Page({
   },
   goOverCheck: function (e) {
     var id = e.currentTarget.dataset.id;
+    console.log("id:"+e.currentTarget.dataset.id+"         data:"+this.data.notOver)
+    //var id = homework.paper_id;
     console.log(id)
     wx.setStorageSync("homeworkOver",true)
     wx.request({
@@ -292,6 +299,165 @@ Page({
         console.log(res.data)
         wx.navigateTo({
           url: '/pages/myClass/classDetail/check/check'
+        })
+      }
+    })
+  },
+
+  getNotJoinInfo:function(){
+    var that = this
+    var id = that.data.detail.id
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/getMemberIds',
+      data: {
+        classId: id
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        that.setData({
+          memberIds: res.data
+        })
+        console.log(that.data.memberIds)
+        wx.request({
+          url: 'http://' + getApp().globalData.ipAdress + '/getNameByMemberIds',
+          data: {
+            memberIds: JSON.stringify(that.data.memberIds)
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            that.setData({
+              member: res.data
+            })
+          }
+        })
+      }
+    }),
+      console.log(that.data.member)
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/getDetailById',
+      data: {
+        id: id
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        that.setData({
+          teacherId: res.data.masterId,
+          detail: res.data
+        })
+        wx.request({
+          url: 'http://' + getApp().globalData.ipAdress + '/getNameById',
+          data: {
+            openid: that.data.teacherId
+          },
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            that.setData({
+              teacher: res.data,
+            })
+          }
+        })
+      }
+    })
+  },
+  deleteInput: function (e) {
+    this.setData({
+      deleteCheck: e.detail.value
+    })
+  },
+  leaveInput: function (e) {
+    this.setData({
+      leaveCheck: e.detail.value
+    })
+  },
+  deleteClass: function () {
+    this.setData({
+      hiddenDelete: false
+    })
+  },
+  leave: function () {
+    this.setData({
+      hiddenLeave: false
+    })
+  },
+  cancel: function () {
+    this.setData({
+      hiddenLeave: true,
+      hiddenDelete:true,
+    })
+  },
+  confirmDelete: function () {
+    var that = this
+    var deleteCheck = this.data.deleteCheck
+    if (deleteCheck != '确认') {
+      $Message({
+        content: '请输入“确认”！',
+        type: 'error'
+      })
+      return
+    }
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/deleteClass',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        classId: that.data.detail.id
+      },
+      success: function (res) {
+        that.setData({
+          hiddenDelete: true
+        })
+        var pages = getCurrentPages();
+        var beforePage = pages[pages.length - 2];
+        beforePage.onLoad();
+        wx.navigateBack({
+          delta: 1,
+        })
+      }
+    })
+  },
+  confirmLeave: function () {
+    var that = this
+    var leaveCheck = this.data.leaveCheck
+    if (leaveCheck != '确认') {
+      $Message({
+        content: '请输入“确认”！',
+        type: 'error'
+      })
+      return
+    }
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/leaveClass',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        openid:  getApp().globalData.openid,
+        classId: that.data.detail.id
+      },
+      success: function (res) {
+        that.setData({
+          hiddenLeave: true
+        })
+        var pages = getCurrentPages();
+        var beforePage = pages[pages.length - 2];
+        beforePage.onLoad();
+        wx.navigateBack({
+          delta: 1,
         })
       }
     })

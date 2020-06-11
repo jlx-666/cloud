@@ -60,7 +60,7 @@ Page({
   },
 
   getStudentId: function (e) {
-    app.globalData.userType = 0
+    
     wx.login({
       
       success: function (res) {
@@ -92,16 +92,19 @@ Page({
               data: {
                 openid: obj.openid,
                 name: app.globalData.userInfo.nickName,
-                type: 0
               },
               method: 'GET',
               header: {
                 'content-type': 'application/json' // 默认值
               },
               success: function (res) {
-                wx.switchTab({
-                  url: '/pages/home/home',
-                })
+                setTimeout(function(){
+                  wx.switchTab({
+                    url: '/pages/home/home',
+                  })
+                }
+                ,2000)
+                
               }
             }) 
           }
@@ -112,16 +115,12 @@ Page({
     
   },
 
-  goAdmin: function () {
-    wx.navigateTo({
-      url: '/pages/admin/admin',
-    })
-  },
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getStudentId()
   },
 
   /**

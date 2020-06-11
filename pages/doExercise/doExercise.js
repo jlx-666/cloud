@@ -12,7 +12,7 @@ Page({
     lastChoice:0,
     lastBlank:0,
     lastWordProblem:0,
-    answer:null,
+    answer:{},
     checkList: new Array(false,false,false,false),
     saveState:false,
     color: new Array('#fff', '#fff', '#fff', '#fff')
@@ -110,6 +110,13 @@ Page({
       console.log("交卷")
     }
     console.log(this.data.answer)
+    let obj = Object.create(null);
+    for (let [k, v] of this.data.answer) {
+      obj[k] = v;
+    }
+
+    console.log(JSON.stringify(obj))
+    wx.setStorageSync("eAnswer", JSON.stringify(obj))
     if(nowpage>1){
       this.setData({
         nowPage: that.data.nowPage - 1,
@@ -124,8 +131,9 @@ Page({
     var nowpage = this.data.nowPage
     console.log(nowpage+1)
     var answerMap = this.data.answer;
-    console.log(answerMap)
+    console.log(answerMap+"ansMap")
     answerMap.set(nowpage, answer)
+    
     if(nowpage >= 0){
       //选择题操作
       console.log("选择")
@@ -159,15 +167,23 @@ Page({
       console.log("应用")
     } else if (nowpage > this.data.lastWordProblem){
       //交卷  
-      console.log("交卷")
+      
     }else{
       console.log("初始")
     }
-    console.log(this.data.answer)
+    let obj = Object.create(null);
+    for (let [k, v] of this.data.answer) {
+      obj[k] = v;
+    }
+
+    console.log(JSON.stringify(obj))
+    wx.setStorageSync("eAnswer", JSON.stringify(obj))
     that.saveCollection()
+    if (nowpage<this.data.lastWordProblem){
     this.setData({
       nowPage: that.data.nowPage + 1,
     })
+    }
   },
   radiochange:function(e){
     answer = e.detail.value
@@ -196,12 +212,13 @@ Page({
     })
   },
   saveCollection:function(){
+    if (this.data.saveState) {
     var that = this
     let obj = Object.create(null);
     for (let [k, v] of that.data.answer) {
       obj[k] = v;
     }
-    if(this.data.saveState){
+    
       wx.request({
         url: 'http://' + getApp().globalData.ipAdress + '/saveCollection',
         data:{
@@ -283,9 +300,18 @@ Page({
   },
 
   confirm:function(){
-    wx.setStorageSync("checkCollection", true)
-    wx.redirectTo({
-      url: '/pages/myClass/classDetail/check/checkStu/checkStu',
-    })
+    this.nextPage()
+    if(this.data.saveState){
+      wx.setStorageSync("checkType", "collection")
+      wx.redirectTo({
+        url: '/pages/myClass/classDetail/check/checkStu/checkStu',
+      })
+    }else{
+      wx.setStorageSync("checkType", "exercise")
+      wx.redirectTo({
+        url: '/pages/myClass/classDetail/check/checkStu/checkStu',
+      })
+    }
+    
   }
 })

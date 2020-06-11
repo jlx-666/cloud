@@ -16,6 +16,9 @@ Page({
   },
 
   addClass:function(){
+    wx.setNavigationBarTitle({
+      title: '创建班级',
+    })
     let openid = getApp().globalData.openid
     let name = this.data.name
     wx.request({

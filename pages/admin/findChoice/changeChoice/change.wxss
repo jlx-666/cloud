@@ -1,1 +1,22 @@
-/* pages/admin/findChoice/changeChoice/change.wxss */
+.radio-group-items{
+  display: flex;
+  margin-top: 50rpx;
+}
+.radio-group-items > view {
+  margin-left: 20rpx;
+}
+textarea{
+    border:  1px solid;
+}
+.inputView{
+  border:  1px solid ;
+}
+.op-input > view{
+  margin-top: 30rpx;
+}
+.op-input > view > textarea{
+  height: 80rpx;
+}
+.diff-view{
+  margin-top: 50rpx;
+}

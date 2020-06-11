@@ -7,7 +7,7 @@ Page({
   data: {
     jump: 0,
     page: 0,
-    size: 20,
+    size: 15,
     list: {},
     maxPage: 0,
     hiddenModal: true
@@ -90,6 +90,25 @@ Page({
     })
   },
 
+  goDetail: function (e) {
+    var id = e.currentTarget.dataset.id;
+    console.log(id)
+    wx.setStorageSync("homeworkOver", false)
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/getById',
+      data: {
+        id: id
+      },
+      success: function (res) {
+        wx.setStorageSync("paper", res.data)
+        console.log(res.data)
+        wx.navigateTo({
+          url: '/pages/admin/paper/detail/detail'
+        })
+      }
+    })
+  },
+
   setPage: function (e) {
     this.setData({
       jump: e.detail.value - 1
@@ -107,6 +126,13 @@ Page({
   },
   confirm: function () {
     var jump = this.data.jump
+    if (jump < 0 || jump > this.data.maxPage - 1) {
+      $Message({
+        content: '页码超出范围！',
+        type: 'error'
+      })
+      return
+    }
     this.setData({
       hiddenModal: true,
       page: jump

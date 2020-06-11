@@ -1,19 +1,22 @@
 <view>
-  <text>考题：</text><input style="margin-left:16rpx" bindinput="setTitle"  placeholder="请在此处输入题目" name="title"></input>
+  <text>考题：</text><view class="textareaView"><textarea style="margin-left:16rpx" bindinput="setTitle"  placeholder="请在此处输入题目" name="title"></textarea></view>
 </view>
-<view>
-  <text>A:</text><input style="margin-left:16rpx" bindinput="setOpA"  placeholder="请输入A选项内容" name="opA"></input>
-</view>
-<view>
-  <text>B:</text><input style="margin-left:16rpx" bindinput="setOpB"  placeholder="请输入B选项内容" name="opB"></input>
-</view>
-<view>
-  <text>C:</text><input style="margin-left:16rpx" bindinput="setOpC"  placeholder="请输入C选项内容" name="opC"></input>
-</view>
-<view>
-  <text>D:</text><input style="margin-left:16rpx" bindinput="setOpD"  placeholder="请输入D选项内容" name="opD"></input>
+<view class="op-input">
+  <view>
+    <text>A选项:</text><textarea style="margin-left:16rpx" bindinput="setOpA"  placeholder="请输入A选项内容" name="opA"></textarea>
+  </view>
+  <view>
+    <text>B选项:</text><textarea style="margin-left:16rpx" bindinput="setOpB"  placeholder="请输入B选项内容" name="opB"></textarea>
+  </view>
+  <view>
+    <text>C选项:</text><textarea style="margin-left:16rpx" bindinput="setOpC"  placeholder="请输入C选项内容" name="opC"></textarea>
+  </view>
+  <view>
+    <text>D选项:</text><textarea style="margin-left:16rpx" bindinput="setOpD"  placeholder="请输入D选项内容" name="opD"></textarea>
+  </view>
 </view>
  <radio-group bindchange="radiochange" class="radio-group-items">
+ <text>正确答案：</text>
     <view>
       <text>A</text><radio value="A" >
       </radio>
@@ -28,8 +31,8 @@
       <text>D</text><radio value="D" ></radio>
     </view>
   </radio-group>
-  <view>
-  <text>难度值:</text><input style="margin-left:16rpx" bindinput="setDif"  placeholder="请输入该题难度值" name="difficulty"></input>
-</view>
-  <button bindtap="commit">commit</button>
+  <view style="display:flex" class="diff-view">
+  <text>难度值:</text><view class="inputView"><input style="margin-left:16rpx；height:" bindinput="setDif"  placeholder="请输入该题难度值" name="difficulty"></input></view>
+  </view>
+  <i-button bindtap="commit" type="primary" class="footer-btn">提交</i-button>
   <i-message id="message"></i-message>

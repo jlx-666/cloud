@@ -1,14 +1,14 @@
 <view class="app-container">
 <block wx:if="{{who=='student'}}">
-  <button bindtap="goInfo">成员情况</button> 
+  <i-button bindtap="goInfo" type="success">成员情况</i-button> 
   <block wx:if="{{noNotOver&&noOver}}">
-    <view>当前老师还未发布作业</view>
+    <view>当前班级还未发布作业</view>
   </block>
   <block wx:if="{{!noNotOver}}">
     <view style="color:green">未结束作业</view>
     <view class="Homework-box" wx:for = "{{homeworkNotOver}}" wx:key="item.paperId" data-item="{{item}}" bindtap="goDoHomework">
     <image src="../../../images/homework.jpg"></image>
-    <text class="Homework-name">未完成作业</text>
+    <text class="Homework-name">未完成作业{{item.paper_id}}</text>
     </view>
   </block>
   <block wx:if="{{!noOver}}">
@@ -16,34 +16,57 @@
     <view class="Homework-box" wx:for = "{{homeworkOver}}" wx:key="item.paperId" data-item="{{item}}" bindtap="goCheck">
     <image src="../../../images/homework.jpg">
     </image>
-    <text class="Homework-name">已完成作业</text>
+    <text class="Homework-name">已完成作业{{item.paper_id}}</text>
     </view>
   </block>
+  <i-button bindtap="leave" type="error" class="footer-btn">退出班级</i-button>
+  <modal hidden="{{hiddenLeave}}" title="请输入“确认”以继续退出操作" confirm-text="确认退出" cancel-text="取消" bindcancel="cancel" bindconfirm="confirmLeave">
+  <view class="modal-items">
+      <view class="inputView"><input bindinput="leaveInput"  name="name"></input></view>
+  </view>
+</modal> 
 </block>
 <block wx:elif="{{who=='notJoin'}}">
-  <view>老师：{{detail.masterId}}</view>
-  <button bindtap="join">加入班级</button>
+  <view class="app-container">
+  <view class="class-name">{{detail.name}}</view>
+  <view class="class-name">班级id：{{detail.id}}</view>
+  <view class="type">教师</view>
+  <view class="class-box">{{teacher}}</view>
+  <view class="type">学生</view>
+  <view class="class-box" wx:ket="{{item}}" wx:for = "{{member}}" data-id="{{item}}" bindtap="goExercise">{{item}}</view>
+</view>
+  <i-button bindtap="join" type="success" class="footer-btn">加入班级</i-button>
 </block>
 <block wx:else>
-  <button bindtap="goInfo">成员情况</button>
-  <button bindtap="toAdd">发布作业</button>
+  <i-button bindtap="goInfo" type="success">成员情况</i-button>
+  <i-button bindtap="toAdd" type="primary">发布作业</i-button>
+  <block wx:if="{{noNotOver&&noOver}}">
+    <view>还未发布作业，快去发布作业吧</view>
+  </block>
   <block wx:if="{{!noNotOver}}">
     <view style="color:green">未结束作业</view>
-    <view class="Homework-box" wx:for = "{{notOver}}" wx:key="item" 
-    data-id="{{item}}" bindtap="goNotOverCheck">
+    <view class="Homework-box" wx:for = "{{notOver}}" wx:key="item.id" 
+    data-id="{{item.id}}" bindtap="goNotOverCheck">
     <image src="../../../images/homework.jpg"></image>
-    <text class="Homework-name">作业{{item}}</text>
+    <text class="Homework-name">作业{{item.title}}</text>
     </view>
   </block>
   <block wx:if="{{!noOver}}">
     <view style="color:red">已结束作业</view>
-    <view class="Homework-box" wx:for = "{{over}}" wx:key="item" 
-    data-id="{{item}}" bindtap="goOverCheck">
+    <view class="Homework-box" wx:for = "{{over}}" wx:key="item.id" 
+    data-id="{{item.id}}" bindtap="goOverCheck">
     <image src="../../../images/homework.jpg">
     </image>
-     <text class="Homework-name">作业{{item}}</text>
+     <text class="Homework-name">作业{{item.title}}</text>
   
     </view>
   </block>
+  <i-button bindtap="deleteClass" type="error" class="footer-btn">解散班级</i-button> 
+  <modal hidden="{{hiddenDelete}}" title="请输入“确认”以继续删除班级操作" confirm-text="确认删除" cancel-text="取消" bindcancel="cancel" bindconfirm="confirmDelete">
+  <view class="modal-items">
+      <view class="inputView"><input bindinput="deleteInput"  name="name"></input></view>
+  </view>
+</modal>
 </block>
 </view>
+<i-message id="message"></i-message>

@@ -1,1 +1,4 @@
-/* pages/myClass/addClass/addClass.wxss */
+.inputView{
+  border:  1px solid black;
+  width: 100%;
+}

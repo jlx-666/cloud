@@ -21,3 +21,40 @@ image{
   background: #f9f9f9;
   min-height: 100vh;
 }
+.class-box {
+  display: flex;
+  align-items: center;
+  margin-right: 25rpx;
+  margin-left: 25rpx;
+  background: #fff;
+  height: 120rpx;
+  padding: 0 20rpx;
+  margin-bottom: 16rpx;
+}
+.class-name {
+  font-size: 45rpx;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+}
+.type {
+  font-size: 36rpx;
+  margin-left: 16rpx;
+}
+.modal-items{
+  display: flex;
+  flex-direction: row;
+  width: 100%; 
+  align-items: center;
+  justify-content: center;
+}
+.inputView{
+  border:  1px solid black;
+  width: 60%;
+}
+input{
+  text-align: center;
+}

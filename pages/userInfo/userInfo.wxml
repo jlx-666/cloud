@@ -5,7 +5,7 @@
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <view class="userinfo-nickname" bindtap="showChangeName"><text>{{nickname}}</text><image src="../../images/修改.jpg" class="images"></image></view>
       <modal hidden="{{hiddenChangeName}}" title="请输入名字" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
-     <input bindinput="setNewName" type="String" name="name"></input>
+      <view class="inputView"><input bindinput="setNewName" type="String" name="name"></input></view>
    </modal>
 
     </block>
@@ -17,8 +17,10 @@
     <i-button class="footer-btn" type="success" bindtap="goCollection">我的收藏</i-button>
 
     <i-button class="footer-btn" style="bottom: 150rpx" type="primary" bindtap="goMyHomework">我的作业</i-button>
+
+    <i-button bindtap="goAdmin" wx:if="{{administrator}}" style="bottom: 270rpx" class="footer-btn" type="warning">管理员页面</i-button>
   
   <view>
-    <button bindtap="goMyHomework" wx:if="{{administrator}}">管理员页面</button>
+    
   </view>
 </view>

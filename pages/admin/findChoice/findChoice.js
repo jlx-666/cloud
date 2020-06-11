@@ -7,7 +7,7 @@ Page({
   data: {
     jump:0,
     page:0,
-    size:20,
+    size:15,
     list:{},
     maxPage:0,
     hiddenModal:true
@@ -16,6 +16,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  
   onLoad: function (options) {
     var that =this
     wx.request({
@@ -35,6 +36,10 @@ Page({
     })
     this.getList()
     console.log(this.data.list)
+  },
+
+  onShow: function (options){
+
   },
 
   nextPage:function(){
@@ -90,6 +95,14 @@ Page({
     })
   },
 
+  changeChoice:function(e){
+    var choiceId = e.currentTarget.dataset.id;
+    wx.setStorageSync("choiceId",choiceId)
+    wx.navigateTo({
+      url: '/pages/admin/findChoice/changeChoice/change',
+    })
+  },
+
   setPage: function (e) {
     this.setData({
       jump: e.detail.value-1
@@ -107,6 +120,13 @@ Page({
   },
   confirm: function () {
     var jump = this.data.jump
+    if(jump < 0||jump>this.data.maxPage-1){
+      $Message({
+        content: '页码超出范围！',
+        type: 'error'
+      })
+      return
+    }
     this.setData({
       hiddenModal: true,
       page:jump

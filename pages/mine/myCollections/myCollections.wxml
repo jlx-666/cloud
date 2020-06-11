@@ -3,7 +3,7 @@
     <text class="item-title">试卷</text>
     <text class="item-dif">难度</text>
   </view>
-  <i-cell wx:for = "{{paperbase}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goDoHomework">
+  <i-cell wx:for = "{{paperbase}}" wx:key="item.id" data-id="{{item.id}}" bindtap="goExercise">
     <text class="hard-title">{{item.title}}</text>     
     <text class="hard-val">{{item.difficulty}}</text>
   </i-cell>

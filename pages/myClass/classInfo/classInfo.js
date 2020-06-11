@@ -15,6 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.setNavigationBarTitle({
+      title: '成员情况',
+    })
     var id = options.id
     var that = this
     wx.request({
@@ -61,6 +64,7 @@ Page({
       success: function (res) {
         that.setData({
           teacherId: res.data.masterId,
+          detail:res.data
         })
         wx.request({
           url: 'http://' + getApp().globalData.ipAdress + '/getNameById',

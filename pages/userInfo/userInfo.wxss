@@ -27,3 +27,11 @@
   width: 50rpx;
   height: 50rpx
 }
+.inputView{
+  border:  1px solid black;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

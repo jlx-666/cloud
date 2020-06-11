@@ -9,12 +9,12 @@
   width: 40%;
 
 }
-.modal{
+.modal-items{
   display: flex;
   flex-direction: row;
-}
-input{
-  width: 30rpx
+  width: 100%; 
+  align-items: center;
+  justify-content: center;
 }
 .choice-box {
   height: 80rpx;
@@ -30,4 +30,23 @@ input{
 .choice-box > text:last-child {
   display: inline-block;
   width: 13%;
+}
+.title{
+  font-size: 40rpx;
+}
+.title > text:first-child{
+  display: inline-block;
+  width: 13%;
+}
+.title > text:nth-child(2){
+  display: inline-block;
+  width: 73%;
+}
+.title > text:last-child{
+  display: inline-block;
+  width: 13%
+}
+.inputView{
+  border:  1px solid black;
+  width: 120rpx;
 }

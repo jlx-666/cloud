@@ -1,2 +1,5 @@
-<input bindinput="setClassId" type="int" placeholder="请输入班级号" name="classId"></input>
-<button bindtap="search">搜索</button>
+<view>
+<text>班级号：</text><view class="inputView"><input bindinput="setClassId" type="number" placeholder="请输入班级号" name="classId"></input></view>
+</view> 
+ 
+<i-button bindtap="search" type="primary" class="footer-btn">搜索</i-button>

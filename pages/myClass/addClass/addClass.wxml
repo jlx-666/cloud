@@ -1,2 +1,6 @@
- <input bindinput="setClassName" type="" placeholder="请输入班级名字" name="name"></input>
-<button bindtap="addClass">完成</button>
+
+<view>
+<text>班级名称：</text><view class="inputView"><input bindinput="setClassName"  placeholder="请输入班级名字" name="name"></input></view>
+</view> 
+ 
+<i-button bindtap="addClass" type="primary" class="footer-btn">创建</i-button>

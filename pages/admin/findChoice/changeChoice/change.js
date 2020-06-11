@@ -5,17 +5,62 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    checkList: new Array(false, false, false, false),
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    var id = wx.getStorageSync("choiceId")
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/getChoiceById',
+      data: {
+        id : id
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        var checklist = new Array(false, false, false, false)
+        that.setData({
+          choice:res.data,
+          difficulty: res.data.difficulty,
+          title: res.data.title,
+          opA: res.data.opA,
+          opB: res.data.opB,
+          opC: res.data.opC,
+          opD: res.data.opD,
+          answer: res.data.answer
+        })
+        
+        switch (res.data.answer) {
+          case "A":
+            checklist[0] = true
+            break;
+          case "B":
+            checklist[1] = true
+            break;
+          case "C":
+            checklist[2] = true
+            break;
+          case "D":
+            checklist[3] = true
+            break;
+        }
+        that.setData({
+          checkList:checklist
+        })
+      }
+    })
   },
 
-  commit: function () {
+
+
+  change:function(){
+    var that = this
     var that = this
     var difficulty = this.data.difficulty
     var title = this.data.title
@@ -58,8 +103,9 @@ Page({
       return
     }
     wx.request({
-      url: 'http://' + getApp().globalData.ipAdress + '/addChoice',
+      url: 'http://' + getApp().globalData.ipAdress + '/saveChoice',
       data: {
+        id: wx.getStorageSync("choiceId"),
         difficulty: difficulty,
         title: title,
         opA: opA,
@@ -73,7 +119,12 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.log("suc add")
+        var pages = getCurrentPages();
+        var beforePage = pages[pages.length - 2];
+        beforePage.onLoad();
+        wx.navigateBack({
+          delta: 1,
+        })
       }
     })
   },

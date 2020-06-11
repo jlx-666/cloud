@@ -1,21 +1,26 @@
-var answer;
 const app = getApp();
+var answer;
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
+    nowCheck: false,
+    homeworkOver: false,
+    deleteCheck:"",
+    hiddenModal:true,
+    classId: null,
     exercise: null,
-    homework: wx.getStorageSync('homework'),
-    classId:"",
     nowPage: 0,
+    answer: null,
+    checkResult: null,
     lastChoice: 0,
     lastBlank: 0,
     lastWordProblem: 0,
-    answer: null,
+
     checkList: new Array(false, false, false, false),
-    saveState: '未完成'
+    color: new Array('black', 'black', 'black', 'black'),
+    saveState: false,
+    enable: true,
+    trueSelect: null,
   },
 
 
@@ -23,35 +28,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('classid'+wx.getStorageSync('homework').class_id)
     var that = this
     var data = wx.getStorageSync("paper")
-    console.log(data)
     var choicesLength = data.choices.length
     var blanksLength = data.blanks.length
     var wordProblemLength = data.wordProblems.length
     var answerMap = new Map()
     this.setData({
       exercise: data,
+      homeworkOver: wx.getStorageSync("homeworkOver"),
       lastChoice: choicesLength,
       lastBlank: choicesLength + blanksLength,
       lastWordProblem: choicesLength + blanksLength + wordProblemLength,
-      classId: wx.getStorageSync('homework').class_id
+      classId: wx.getStorageSync("detail").id,
     })
     var paperId = this.data.exercise.id
     var openId = app.globalData.openid
-    if (that.data.homework.state=='未完成') {
-          that.setData({
-            saveState: true          
-          })
-          that.setAnswer()
-    }
-    else {
-
-      this.setData({
-        answer: new Map()
-      })
-    }
+    this.getPaperAnswer()
   },
 
   lastPage: function () {
@@ -64,28 +57,44 @@ Page({
       //选择题操作
       console.log("选择")
       var a = that.data.answer
-      console.log(a)
       var checklist = new Array(false, false, false, false)
+      var color = new Array('black', 'black', 'black', 'black')
       switch (a.get(nowpage - 1)) {
         case "A":
           checklist[0] = true
+          color[0] = 'green'
           break;
         case "B":
           checklist[1] = true
+          color[1] = 'green'
           break;
         case "C":
           checklist[2] = true
+          color[2] = 'green'
           break;
         case "D":
           checklist[3] = true
+          color[3] = 'green'
           break;
       }
-      if (nowpage > 1) {
-        answer = a.get(nowpage - 1)
-      }
+      answer = a.get(nowpage - 1)
+      
+      /*if (typeof (answer) == 'undefined') {
+        var noSelect = true
+      } else {
+        var noSelect = false
+        yourSelect = answer
+        if (answer == b.get(nowpage - 1)) {
+          rightOrNot = true
+        } else {
+          rightOrNot = false
+        }
+      }*/
       this.setData({
         answer: answerMap,
-        checkList: checklist
+        checkList: checklist,
+        color: color,
+        trueSelect: answer
       })
     } else if (nowpage > this.data.lastChoice) {
       //填空题操作
@@ -104,8 +113,6 @@ Page({
         nowPage: that.data.nowPage - 1,
       })
     }
-
-
   },
 
   nextPage: function () {
@@ -113,31 +120,50 @@ Page({
     var nowpage = this.data.nowPage
     console.log(nowpage + 1)
     var answerMap = this.data.answer;
-    console.log(answerMap)
     answerMap.set(nowpage, answer)
     if (nowpage >= 0) {
       //选择题操作
       console.log("选择")
       var a = that.data.answer
       var checklist = new Array(false, false, false, false)
+      var color = new Array('black', 'black', 'black', 'black')
       switch (a.get(nowpage + 1)) {
         case "A":
           checklist[0] = true
+          color[0] = 'green'
           break;
         case "B":
           checklist[1] = true
+          color[1] = 'green'
           break;
         case "C":
           checklist[2] = true
+          color[2] = 'green'
           break;
         case "D":
           checklist[3] = true
+          color[3] = 'green'
           break;
       }
       answer = a.get(nowpage + 1)
+     
+
+      /*if (typeof (answer) == 'undefined') {
+        var noSelect = true
+      } else {
+        var noSelect = false
+        yourSelect = answer
+        if (answer == b.get(nowpage + 1)) {
+          rightOrNot = true
+        } else {
+          rightOrNot = false
+        }
+      }*/
       this.setData({
         answer: answerMap,
-        checkList: checklist
+        checkList: checklist,
+        color: color,
+        trueSelect: answer
       })
     } else if (nowpage > this.data.lastChoice) {
       //填空题操作
@@ -153,115 +179,83 @@ Page({
       console.log("初始")
     }
     console.log(this.data.answer)
-    that.saveHomework()
-    if (nowpage < this.data.lastWordProblem){
-      this.setData({
-        nowPage: that.data.nowPage + 1,
-      })
-    }
-    
+    this.setData({
+      nowPage: that.data.nowPage + 1,
+    })
   },
-  radiochange: function (e) {
-    answer = e.detail.value
-  },
+  /*radiochange: function (e) {
+     answer = e.detail.value
+   },*/
 
- 
-  saveHomework: function () {
-    var that = this
-    let obj = Object.create(null);
-    for (let [k, v] of that.data.answer) {
-      obj[k] = v;
-    }
-    if (this.data.saveState) {
-      wx.request({
-        url: 'http://' + getApp().globalData.ipAdress + '/saveHomework',
-        data: {
-          classId: that.data.classId,
-          openId: app.globalData.openid,
-          paperId: that.data.exercise.id,
-          answer: JSON.stringify(obj)
-        },
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-
-      })
-    }
-  },
-
-
-
-
-  setAnswer: function () {
+  getPaperAnswer: function () {
     var that = this
     console.log(this.data.saveState)
     var paperId = this.data.exercise.id
-    var openId = app.globalData.openid
     var answerMap
-    if (this.data.saveState) {
-      console.log("etAnswer")
-      wx.request({
-        url: 'http://' + getApp().globalData.ipAdress + '/getHomeworkAnswer',
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        data: {
-          paperId: paperId,
-          openId: openId,
-          classId: that.data.classId
-        },
-        success: function (res) {
-          answerMap = res.data
-          let strMap = new Map();
-          for (let k of Object.keys(answerMap)) {
-            let key = parseInt(k)
-            strMap.set(key, answerMap[k]);
-          }
-          console.log(strMap)
-          that.setData({
-            answer: strMap
-          })
-        }
-      })
-    }
-    else {
-      console.log("notget")
-      answerMap = new Map()
-      that.setData({
-        answer: answerMap
-      })
-    }
-    console.log("2")
-  },
-
-  confirm:function(){
-    this.nextPage()
-    var that=this
-    let obj = Object.create(null);
-    for (let [k, v] of that.data.answer) {
-      obj[k] = v;
-    }
     wx.request({
-      url: 'http://' + getApp().globalData.ipAdress + '/homeworkDone',
-      data: {
-        classId: that.data.classId,
-        openId: app.globalData.openid,
-        paperId: that.data.exercise.id,
-        answer: JSON.stringify(obj),
-      },
+      url: 'http://' + getApp().globalData.ipAdress + '/findAnswerByPaperId',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
+      data: {
+        paperId: paperId,
+      },
+      success: function (res) {
+        answerMap = res.data
+        let strMap = new Map();
+        for (let k of Object.keys(answerMap)) {
+          let key = parseInt(k)
+          strMap.set(key, answerMap[k]);
+        }
+        console.log(strMap)
+        that.setData({
+          answer: strMap
+        })
+      }
+    })
+  },
 
+  setInput: function (e) {
+    this.setData({
+      deleteCheck:e.detail.value
     })
-    var pages = getCurrentPages();
-    var beforePage = pages[pages.length - 2];
-    beforePage.onLoad();
-    wx.navigateBack({
-      delta: 1,
+  },
+  deletePaper: function () {
+    this.setData({
+      hiddenModal: false
     })
-  }
+  },
+  cancel: function () {
+    this.setData({
+      hiddenModal: true
+    })
+  },
+  confirm: function () {
+    var that=this
+    var deleteCheck = this.data.deleteCheck
+    if (deleteCheck!='确认') {
+      $Message({
+        content: '请输入“确认”！',
+        type: 'error'
+      })
+      return
+    }
+    wx.request({
+      url: 'http://' + getApp().globalData.ipAdress + '/deletePaperById',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        paperId: this.data.exercise.id,
+      },
+      success: function (res) {
+        that.setData({
+          hiddenModal: true
+        })
+      }
+    })
+  },
+ 
 })
